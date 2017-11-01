@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>Archives: 2017/10 | 征哥的博客</title>
+  <title>co源码解析 | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/archives/2017/10/index.html">
+  <meta name="description" content="###co 是著名的 TJ 于 2013 年推出的一个利用 ES6 的 Generator 函数来解决异步操作的开源项目，也是后来 JavaScript 异步操作的终极解决方案—— async/await 的先驱。时至今日，co 版本号已经来到了 4.x，不过其代码仍然只有寥寥数百行，十分适合阅读与学习。下面我们就来看一下 co 是如何对异步操作进行处理的。 首先先来看一下 co 的基本用法。co">
+<meta name="keywords" content="源码解析 - node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="co源码解析">
+<meta property="og:url" content="https://zhenggege.github.io/2017/11/01/co源码解析/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="###co 是著名的 TJ 于 2013 年推出的一个利用 ES6 的 Generator 函数来解决异步操作的开源项目，也是后来 JavaScript 异步操作的终极解决方案—— async/await 的先驱。时至今日，co 版本号已经来到了 4.x，不过其代码仍然只有寥寥数百行，十分适合阅读与学习。下面我们就来看一下 co 是如何对异步操作进行处理的。 首先先来看一下 co 的基本用法。co">
+<meta property="og:updated_time" content="2017-11-01T16:15:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="co源码解析">
+<meta name="twitter:description" content="###co 是著名的 TJ 于 2013 年推出的一个利用 ES6 的 Generator 函数来解决异步操作的开源项目，也是后来 JavaScript 异步操作的终极解决方案—— async/await 的先驱。时至今日，co 版本号已经来到了 4.x，不过其代码仍然只有寥寥数百行，十分适合阅读与学习。下面我们就来看一下 co 是如何对异步操作进行处理的。 首先先来看一下 co 的基本用法。co">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -147,49 +148,190 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-co源码解析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/30/开通博客/" class="archive-article-date">
-  	<time datetime="2017-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/30/开通博客/">开通博客</a>
+    <h1 class="article-title" itemprop="name">
+      co源码解析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/11/01/co源码解析/" class="archive-article-date">
+  	<time datetime="2017-11-01T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###<br>co 是著名的 TJ 于 2013 年推出的一个利用 ES6 的 Generator 函数来解决异步操作的开源项目，也是后来 JavaScript 异步操作的终极解决方案—— async/await 的先驱。时至今日，co 版本号已经来到了 4.x，不过其代码仍然只有寥寥数百行，十分适合阅读与学习。下面我们就来看一下 co 是如何对异步操作进行处理的。</p>
+<p>首先先来看一下 co 的基本用法。co 使用起来十分方便，只需要将一个 Generator 函数作为参数传给 co()，就能在该函数中像同步代码一样编写异步代码。看一下官方示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var co = require(&apos;co&apos;);</div><div class="line">co(function *()&#123;</div><div class="line">  // yield any promise</div><div class="line">  var result = yield Promise.resolve(true);</div><div class="line">&#125;).catch(onerror);</div><div class="line">// focus on this</div><div class="line">co(function *()&#123;</div><div class="line">  // resolve multiple promises in parallel</div><div class="line">  var a = Promise.resolve(1);</div><div class="line">  var b = Promise.resolve(2);</div><div class="line">  var c = Promise.resolve(3);</div><div class="line">  var res = yield [a, b, c];</div><div class="line">  console.log(res);</div><div class="line">  // =&gt; [1, 2, 3]</div><div class="line">&#125;).catch(onerror);</div><div class="line">// errors can be try/catched</div><div class="line">co(function *()&#123;</div><div class="line">  try &#123;</div><div class="line">    yield Promise.reject(new Error(&apos;boom&apos;));</div><div class="line">  &#125; catch (err) &#123;</div><div class="line">    console.error(err.message); // &quot;boom&quot;</div><div class="line"> &#125;</div><div class="line">&#125;).catch(onerror);</div><div class="line">function onerror(err) &#123;</div><div class="line">  // log any uncaught errors</div><div class="line">  // co will not throw any errors you do not handle!!!</div><div class="line">  // HANDLE ALL YOUR ERRORS!!!</div><div class="line">  console.error(err.stack);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>第 9 行的函数体中，a、b、c 的值都是异步返回的，但是却可以像同步一样调用。这便是 co 的魔力。</p>
+<p>除此之外，co 还提供了一个 API—— co.wrap() ，用于将被 co 包裹的 generator 函数转换成为一个返回 promise 的普通函数，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var fn = co.wrap(function* (val) &#123;</div><div class="line">  return yield Promise.resolve(val);</div><div class="line">&#125;);</div><div class="line">fn(true).then(function (val) &#123;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>了解完了 API，我们就可以来看一下 co 内部的实现原理。下面是经过笔者注解（中文注释）的源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * slice() reference.</div><div class="line"> */</div><div class="line">var slice = Array.prototype.slice;</div><div class="line">/**</div><div class="line"> * Expose `co`.</div><div class="line"> */</div><div class="line">module.exports = co[&apos;default&apos;] = co.co = co;</div><div class="line">/**</div><div class="line"> * Execute the generator function or a generator</div><div class="line"> * and return a promise.</div><div class="line"> *</div><div class="line"> * @param &#123;Function&#125; fn</div><div class="line"> * @return &#123;Promise&#125;</div><div class="line"> * @api public</div><div class="line"> */</div><div class="line">// 这里是核心代码</div><div class="line">function co(gen) &#123;</div><div class="line">  // 缓存上下文</div><div class="line">  var ctx = this;</div><div class="line">  var args = slice.call(arguments, 1)</div><div class="line">  // we wrap everything in a promise to avoid promise chaining,</div><div class="line">  // which leads to memory leak errors.</div><div class="line">  // see https://github.com/tj/co/issues/180</div><div class="line">  </div><div class="line">  // co() 返回值为 promise</div><div class="line">  return new Promise(function(resolve, reject) &#123;</div><div class="line">    // 执行一次 generator 函数以获取遍历器</div><div class="line">    if (typeof gen === &apos;function&apos;) gen = gen.apply(ctx, args);</div><div class="line">    if (!gen || typeof gen.next !== &apos;function&apos;) return resolve(gen);</div><div class="line">    // 启动执行</div><div class="line">    onFulfilled();</div><div class="line">    /**</div><div class="line">     * @param &#123;Mixed&#125; res</div><div class="line">     * @return &#123;Promise&#125;</div><div class="line">     * @api private</div><div class="line">     */</div><div class="line">    function onFulfilled(res) &#123;</div><div class="line">      var ret;</div><div class="line">      // 执行 generator 函数的 next 方法，如出错则 reject</div><div class="line">      try &#123;</div><div class="line">        ret = gen.next(res);</div><div class="line">      &#125; catch (e) &#123;</div><div class="line">        return reject(e);</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      // 继续执行 next 函数</div><div class="line">      next(ret);</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * @param &#123;Error&#125; err</div><div class="line">     * @return &#123;Promise&#125;</div><div class="line">     * @api private</div><div class="line">     */</div><div class="line">    function onRejected(err) &#123;</div><div class="line">      var ret;</div><div class="line">      // 执行 generator 函数的 throw 方法（用于抛出错误，由 generator 函数内部进行错误处理），如出错则 reject</div><div class="line">      try &#123;</div><div class="line">        ret = gen.throw(err);</div><div class="line">      &#125; catch (e) &#123;</div><div class="line">        return reject(e);</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      // 继续执行 next 函数</div><div class="line">      next(ret);</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * Get the next value in the generator,</div><div class="line">     * return a promise.</div><div class="line">     *</div><div class="line">     * @param &#123;Object&#125; ret</div><div class="line">     * @return &#123;Promise&#125;</div><div class="line">     * @api private</div><div class="line">     */</div><div class="line">	</div><div class="line">    // 关键所在，自动连续执行 next()</div><div class="line">    function next(ret) &#123;</div><div class="line">      // generator 函数执行完毕，返回</div><div class="line">      if (ret.done) return resolve(ret.value);</div><div class="line">      // 每次均将 yield 返回的 value 转换为 promise </div><div class="line">      var value = toPromise.call(ctx, ret.value);</div><div class="line">      // 使用 Promise.then 递归连续执行</div><div class="line">      // onFulfilled 和 onRejected 函数中会继续调用 next 函数自身</div><div class="line">      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);</div><div class="line">      // yield 返回的 value 无法转换为 promise 时进行错误处理</div><div class="line">      return onRejected(new TypeError(&apos;You may only yield a function, promise, generator, array, or object, &apos;</div><div class="line">        + &apos;but the following object was passed: &quot;&apos; + String(ret.value) + &apos;&quot;&apos;));</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> * Wrap the given generator `fn` into a</div><div class="line"> * function that returns a promise.</div><div class="line"> * This is a separate function so that</div><div class="line"> * every `co()` call doesn&apos;t create a new,</div><div class="line"> * unnecessary closure.</div><div class="line"> *</div><div class="line"> * @param &#123;GeneratorFunction&#125; fn</div><div class="line"> * @return &#123;Function&#125;</div><div class="line"> * @api public</div><div class="line"> */</div><div class="line">// 单看代码可能略为有点晦涩，结合上面 co.wrap 的使用示例比较容易理解</div><div class="line">// 实际上这里只是作了一层简单的封装，方便传参</div><div class="line">co.wrap = function (fn) &#123;</div><div class="line">  createPromise.__generatorFunction__ = fn;</div><div class="line">  return createPromise;</div><div class="line">  function createPromise() &#123;</div><div class="line">    // 传入的参数通过 apply 方式作为 fn 的参数执行</div><div class="line">    // 然后仍然是调用 co 函数，回到上面的逻辑</div><div class="line">    return co.call(this, fn.apply(this, arguments));</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">// 下面是一些功能性的 utils 函数，根据注释便可知晓其用法，此处省略函数具体实现，不作过多赘述</div><div class="line">/**</div><div class="line"> * Convert a `yield`ed value into a promise.</div><div class="line"> */</div><div class="line">function toPromise(obj) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Convert a thunk to a promise.</div><div class="line"> */</div><div class="line">function thunkToPromise(fn) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Convert an array of &quot;yieldables&quot; to a promise.</div><div class="line"> * Uses `Promise.all()` internally.</div><div class="line"> */</div><div class="line">function arrayToPromise(obj) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Convert an object of &quot;yieldables&quot; to a promise.</div><div class="line"> * Uses `Promise.all()` internally.</div><div class="line"> */</div><div class="line">function objectToPromise(obj)&#123;&#125;</div><div class="line">/**</div><div class="line"> * Check if `obj` is a promise.</div><div class="line"> */</div><div class="line">function isPromise(obj) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Check if `obj` is a generator.</div><div class="line"> */</div><div class="line">function isGenerator(obj) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Check if `obj` is a generator function.</div><div class="line"> */</div><div class="line">function isGeneratorFunction(obj) &#123;&#125;</div><div class="line">/**</div><div class="line"> * Check for plain object.</div><div class="line"> */</div><div class="line">function isObject(val) &#123;&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到，co 的核心逻辑在于第 90 行的 next 函数，这里将每一次 yield 的返回值包装成 Promise 对象，在 Promise 的 onFulfilled 和 onRejected 状态中继续递归调用 next 函数，保证链式调用自动执行，使得异步的代码能够以同步的方式运行。</p>
+<p>可能还有读者有疑问，如果不借助 Promise，这样的链式自动执行是否还可以实现。事实上，在 co 的 4.0.0 版本以前，其底层实现就没有借助 Promise，而是采用了 Thunk 函数的方式。感兴趣的读者可以切换到 3.1.0 版本学习源码。</p>
+<p>阮一峰老师在《ECMAScript 6 入门》一书中对于 Generator 函数自动执行的原理有一个精准的结论：“自动执行的关键是，必须有一种机制，自动控制 Generator 函数的流程，接收和交还程序的执行权。回调函数可以做到这一点，Promise 对象也可以做到这一点。”我们还是以 Promise 对象为例解释一下这句话：将通过 yield 返回的对象的 value 保持为一个 Promise 对象，执行之，即可拿到程序的执行权。然后通过 Promise.then 和 Promise.reject 方法中调用 generator 的 next 方法，可以交还程序执行权。如此达到自动执行 generator 函数的效果。</p>
+<p>最后，感谢 co 这样的优秀项目作为开拓者，才有了后来的 async/await ，让 JavaScript 开发人员不再因为这门语言独特的单线程特性而深陷异步编程带来的困扰。</p>
+<p>马上睡觉了，博客最近整好的，今天代码就不设置高亮了，将就着看吧暂时，回头改下</p>
+<p>原文链接：<a href="http://chriscindy.top/post/the-analysis-of-the-source-code-of-co/" target="_blank" rel="external">http://chriscindy.top/post/the-analysis-of-the-source-code-of-co/</a></p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析 - node.js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2017/11/01/co源码解析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/10/30/开通博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">开通博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -212,8 +354,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
