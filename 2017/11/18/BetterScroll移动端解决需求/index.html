@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>Tag: node.js | 征哥的博客</title>
+  <title>BetterScroll | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/tags/node-js/index.html">
+  <meta name="description" content="BetterScroll 是一款重点解决移动端各种滚动场景需求的开源插件（GitHub地址），适用于滚动列表、选择器、轮播图、索引列表、开屏引导等应用场景。为了满足这些场景，它不仅支持惯性滚动、边界回弹、滚动条淡入淡出等效果的灵活配置，让滚动更加流畅，同时还提供了很多 API 方法和事件，以便我们更快地实现滚动场景下的需求，如下拉刷新、上拉加载。由于它基于原生 JavaScript 实现，不依赖任">
+<meta name="keywords" content="源码解析,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BetterScroll">
+<meta property="og:url" content="https://zhenggege.github.io/2017/11/18/BetterScroll移动端解决需求/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="BetterScroll 是一款重点解决移动端各种滚动场景需求的开源插件（GitHub地址），适用于滚动列表、选择器、轮播图、索引列表、开屏引导等应用场景。为了满足这些场景，它不仅支持惯性滚动、边界回弹、滚动条淡入淡出等效果的灵活配置，让滚动更加流畅，同时还提供了很多 API 方法和事件，以便我们更快地实现滚动场景下的需求，如下拉刷新、上拉加载。由于它基于原生 JavaScript 实现，不依赖任">
+<meta property="og:updated_time" content="2017-11-20T09:00:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="BetterScroll">
+<meta name="twitter:description" content="BetterScroll 是一款重点解决移动端各种滚动场景需求的开源插件（GitHub地址），适用于滚动列表、选择器、轮播图、索引列表、开屏引导等应用场景。为了满足这些场景，它不仅支持惯性滚动、边界回弹、滚动条淡入淡出等效果的灵活配置，让滚动更加流畅，同时还提供了很多 API 方法和事件，以便我们更快地实现滚动场景下的需求，如下拉刷新、上拉加载。由于它基于原生 JavaScript 实现，不依赖任">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,36 +144,114 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-BetterScroll移动端解决需求" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/01/co源码解析/" class="archive-article-date">
-  	<time datetime="2017-11-01T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/01/co源码解析/">co源码解析</a>
+    <h1 class="article-title" itemprop="name">
+      BetterScroll
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/11/18/BetterScroll移动端解决需求/" class="archive-article-date">
+  	<time datetime="2017-11-18T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BetterScroll 是一款重点解决移动端各种滚动场景需求的开源插件（GitHub地址），适用于滚动列表、选择器、轮播图、索引列表、开屏引导等应用场景。<br>为了满足这些场景，它不仅支持惯性滚动、边界回弹、滚动条淡入淡出等效果的灵活配置，让滚动更加流畅，同时还提供了很多 API 方法和事件，以便我们更快地实现滚动场景下的需求，如下拉刷新、上拉加载。<br>由于它基于原生 JavaScript 实现，不依赖任何框架，所以既可以原生 JavaScript 引用，也可以与目前前端 MVVM 框架结合使用，比如，其官网上的示例就是与 Vue 的结合。<br>首先，让我们来看一下它是怎样让滚动更流畅的吧。<br><a id="more"></a></p>
+<h2 id="让滚动更流畅"><a href="#让滚动更流畅" class="headerlink" title="让滚动更流畅"></a>让滚动更流畅</h2><p>在移动端，如果你使用过 overflow: scroll 生成一个滚动容器，会发现它的滚动是比较卡顿，呆滞的。为什么会出现这种情况呢？<br>因为我们早已习惯了目前的主流操作系统和浏览器视窗的滚动体验，比如滚动到边缘会有回弹，手指停止滑动以后还会按惯性继续滚动一会，手指快速滑动时页面也会快速滚动。而这种原生滚动容器却没有，就会让人感到卡顿。</p>
+<h2 id="BetterScroll-的滚动体验"><a href="#BetterScroll-的滚动体验" class="headerlink" title="BetterScroll 的滚动体验"></a>BetterScroll 的滚动体验</h2><p>试一试 BetterScroll 的滚动体验吧。</p>
+<p>可以发现，在增加惯性滚动，边缘回弹等效果之后，明显流畅、舒服了很多。那么，这些效果是怎么实现的呢？</p>
+<h2 id="惯性滚动"><a href="#惯性滚动" class="headerlink" title="惯性滚动"></a>惯性滚动</h2><p>BetterScroll 在用户滑动操作结束时，还会继续惯性滚动一段。首先看一下源码中的 BScroll.prototype._end 函数，这是 touchend、mouseup、touchcancel、mousecancel 事件的处理函数，也就是用户滚动操作结束时的逻辑。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">BScroll.prototype._end = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.options.momentum &amp;&amp; duration &lt; <span class="keyword">this</span>.options.momentumLimitTime &amp;&amp; (absDistY &gt; <span class="keyword">this</span>.options.momentumLimitDistance || absDistX &gt; <span class="keyword">this</span>.options.momentumLimitDistance)) &#123;</div><div class="line">      <span class="keyword">let</span> momentumX = <span class="keyword">this</span>.hasHorizontalScroll ? momentum(<span class="keyword">this</span>.x, <span class="keyword">this</span>.startX, duration, <span class="keyword">this</span>.maxScrollX, <span class="keyword">this</span>.options.bounce ? <span class="keyword">this</span>.wrapperWidth : <span class="number">0</span>, <span class="keyword">this</span>.options)</div><div class="line">        : &#123;<span class="attr">destination</span>: newX, <span class="attr">duration</span>: <span class="number">0</span>&#125;</div><div class="line">      <span class="keyword">let</span> momentumY = <span class="keyword">this</span>.hasVerticalScroll ? momentum(<span class="keyword">this</span>.y, <span class="keyword">this</span>.startY, duration, <span class="keyword">this</span>.maxScrollY, <span class="keyword">this</span>.options.bounce ? <span class="keyword">this</span>.wrapperHeight : <span class="number">0</span>, <span class="keyword">this</span>.options)</div><div class="line">        : &#123;<span class="attr">destination</span>: newY, <span class="attr">duration</span>: <span class="number">0</span>&#125;</div><div class="line">      newX = momentumX.destination</div><div class="line">      newY = momentumY.destination</div><div class="line">      time = <span class="built_in">Math</span>.max(momentumX.duration, momentumY.duration)</div><div class="line">      <span class="keyword">this</span>.isInTransition = <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码的作用是，在用户滑动操作结束时，如果需要开启了惯性滚动，用 momentum 函数计算惯性滚动距离和时间。该函数，根据用户滑动操作的速度和 deceleration选项 ——惯性减速来计算滚动距离，至于滚动时间，也是一个可配置的选项。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">momentum</span>(<span class="params">current, start, time, lowerMargin, wrapperSize, options</span>) </span>&#123;  </div><div class="line">  ...</div><div class="line">  <span class="keyword">let</span> distance = current - start</div><div class="line">  <span class="keyword">let</span> speed = <span class="built_in">Math</span>.abs(distance) / time</div><div class="line">  ...</div><div class="line">  <span class="keyword">let</span> duration = swipeTime</div><div class="line">  <span class="keyword">let</span> destination = current + speed / deceleration * (distance &lt; <span class="number">0</span> ? <span class="number">-1</span> : <span class="number">1</span>)</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="边缘回弹"><a href="#边缘回弹" class="headerlink" title="边缘回弹"></a>边缘回弹</h2><p>超过边缘时的回弹，有两个处理步骤，第一步是滚动到超过边界时速度要变慢，第二步是回弹到边界。其中，第一步是在源码的 BScroll.prototype._move 函数，这是 touchmove 和 mousemove 事件的处理函数，也就是在用户滑动操作过程中的逻辑。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Slow down or stop if outside of the boundaries</span></div><div class="line"><span class="keyword">if</span> (newY &gt; <span class="number">0</span> || newY &lt; <span class="keyword">this</span>.maxScrollY) &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.options.bounce) &#123;</div><div class="line">        newY = <span class="keyword">this</span>.y + deltaY / <span class="number">3</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        newY = newY &gt; <span class="number">0</span> ? <span class="number">0</span> : <span class="keyword">this</span>.maxScrollY</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第二步是调用BScroll.prototype.resetPosition函数，回弹到边界。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">BScroll.prototype.resetPosition = <span class="function"><span class="keyword">function</span> (<span class="params">time = <span class="number">0</span>, easeing = ease.bounce</span>) </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">let</span> y = <span class="keyword">this</span>.y</div><div class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.hasVerticalScroll || y &gt; <span class="number">0</span>) &#123;</div><div class="line">      y = <span class="number">0</span></div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (y &lt; <span class="keyword">this</span>.maxScrollY) &#123;</div><div class="line">      y = <span class="keyword">this</span>.maxScrollY</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    <span class="keyword">this</span>.scrollTo(x, y, time, easeing)</div><div class="line">    ...</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>流畅的滚动仅仅是基础，BetterScoll 真正的能力在于：提供了大量通用 / 定制的 option 选项 、 API 方法和事件，让各种滚动需求实现起来更高效。</p>
+<h2 id="如何应用于各种需求场景"><a href="#如何应用于各种需求场景" class="headerlink" title="如何应用于各种需求场景"></a>如何应用于各种需求场景</h2><p>下面，以结合 Vue 的使用为例，说一下 BetterScroll 在各种场景下的姿势。</p>
+<h2 id="普通滚动列表"><a href="#普通滚动列表" class="headerlink" title="普通滚动列表"></a>普通滚动列表</h2><p>比如，有如下列表：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"wrapper"</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"list-content"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> @<span class="attr">click</span>=<span class="string">"clickItem($event,item)"</span> <span class="attr">class</span>=<span class="string">"list-item"</span> <span class="attr">v-for</span>=<span class="string">"item in data"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我们想要让它垂直滚动，只需要对该容器进行简单的初始化。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">'better-scroll'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> options = &#123;</div><div class="line">  scrollY: <span class="literal">true</span> <span class="comment">// 因为scrollY默认为true，其实可以省略</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div></pre></td></tr></table></figure></p>
+<p>对于 Vue 中使用 BetterScroll，有一个需要注意的点是，因为在 Vue 模板中列表渲染还没完成时，是没有生成列表 DOM 元素的，所以需要在确保列表渲染完成以后，才能创建 BScroll 实例，因此在 Vue 中，初始化 BScroll 的最佳时机是 mouted 的 nextTick。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 在 Vue 中，保证列表渲染完成时，初始化 BScroll</span></div><div class="line">mounted() &#123;</div><div class="line">   setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">     <span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div><div class="line">   &#125;, <span class="number">20</span>)</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<p>初始化之后，这个 wrapper 容器就能够优雅地滚动了，并且可以通过 BScroll 实例this.scroll使用其提供的 API 方法和事件。<br>下面介绍几个常用的选项、方法和事件。</p>
+<h2 id="滚动条"><a href="#滚动条" class="headerlink" title="滚动条"></a>滚动条</h2><p>scrollbar选项，用来配置滚动条，默认为 false。当设置为 true 或者是一个 Object，开启滚动条。还可以通过 fade 属性，配置滚动条是随着滚动操作淡入淡出，还是一直显示<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// fade 默认为 true，滚动条淡入淡出</span></div><div class="line">options.scrollbar = <span class="literal">true</span></div><div class="line"></div><div class="line"><span class="comment">// 滚动条一直显示</span></div><div class="line">options.scrollbar = &#123;</div><div class="line">  fade: <span class="literal">false</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div></pre></td></tr></table></figure></p>
+<h2 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h2><p>pullDownRefresh选项，用来配置下拉刷新功能。当设置为 true 或者是一个 Object 的时候，开启下拉刷新，可以配置顶部下拉的距离（threshold）来决定刷新时机，以及回弹停留的距离（stop）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">options.pullDownRefresh = &#123;</div><div class="line">  threshold: <span class="number">50</span>, <span class="comment">// 当下拉到超过顶部 50px 时，触发 pullingDown 事件</span></div><div class="line">  stop: <span class="number">20</span> <span class="comment">// 刷新数据的过程中，回弹停留在距离顶部还有 20px 的位置</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div></pre></td></tr></table></figure></p>
+<p>监听 pullingDown 事件，刷新数据。并在刷新数据完成之后，调用 finishPullDown() 方法，回弹到顶部边界<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.scroll.on(<span class="string">'pullingDown'</span>, () =&gt; &#123;</div><div class="line">  <span class="comment">// 刷新数据的过程中，回弹停留在距离顶部还有20px的位置</span></div><div class="line">  RefreshData()</div><div class="line">    .then(<span class="function">(<span class="params">newData</span>) =&gt;</span> &#123;</div><div class="line">      <span class="keyword">this</span>.data = newData</div><div class="line">      <span class="comment">// 在刷新数据完成之后，调用 finishPullDown 方法，回弹到顶部</span></div><div class="line">      <span class="keyword">this</span>.scroll.finishPullDown()</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="上拉加载"><a href="#上拉加载" class="headerlink" title="上拉加载"></a>上拉加载</h2><p>pullUpLoad选项，用来配置上拉加载功能。当设置为 true 或者是一个 Object 的时候，可以开启上拉加载，可以配置离底部距离阈值（threshold）来决定开始加载的时机<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">options.pullUpLoad = &#123;</div><div class="line">  threshold: <span class="number">-20</span> <span class="comment">// 在上拉到超过底部 20px 时，触发 pullingUp 事件</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div></pre></td></tr></table></figure></p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>wheel选项，用于开启并配置选择器。可配置选择器当前选择的索引（selectedIndex），列表的弯曲弧度（rotate），以及切换选择项的调整时间（adjustTime）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">options.wheel = &#123;</div><div class="line">  selectedIndex: <span class="number">0</span>,</div><div class="line">  rotate: <span class="number">25</span>,</div><div class="line">  adjustTime: <span class="number">400</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化选择器的每一列</span></div><div class="line"><span class="keyword">this</span>.wheels[i] = <span class="keyword">new</span> BScroll(wheelWrapper.children[i], options)</div></pre></td></tr></table></figure></p>
+<p>其中联动选择器，需要监听每个选择列表的选择，来改变其他选择列表。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">data() &#123;</div><div class="line">   <span class="keyword">return</span> &#123;</div><div class="line">     tempIndex: [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</div><div class="line">   &#125;</div><div class="line">&#125;,</div><div class="line">...</div><div class="line"><span class="comment">// 监听每个选择列表的选择</span></div><div class="line"><span class="keyword">this</span>.wheels[i].on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">this</span>.tempIndex.splice(i, <span class="number">1</span>, <span class="keyword">this</span>.wheels[i].getSelectedIndex())</div><div class="line">&#125;)</div><div class="line">...</div><div class="line"><span class="comment">// 根据当前选择项，确定其他选择列表的内容</span></div><div class="line">computed: &#123;</div><div class="line">  linkageData() &#123;</div><div class="line">    <span class="keyword">const</span> provinces = provinceList</div><div class="line">    <span class="keyword">const</span> cities = cityList[provinces[<span class="keyword">this</span>.tempIndex[<span class="number">0</span>]].value]</div><div class="line">    <span class="keyword">const</span> areas = areaList[cities[<span class="keyword">this</span>.tempIndex[<span class="number">1</span>]].value]</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [provinces, cities, areas]</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
+<h2 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h2><p>snap选项，用于开启并配置轮播图。可配置轮播图是否循环播放（loop），每页的宽度（stepX）和高度（stepY），切换阈值（threshold），以及切换速度（speed）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">options = &#123;</div><div class="line">  scrollX: <span class="literal">true</span>,</div><div class="line">  snap: &#123;</div><div class="line">    loop: <span class="literal">true</span>, <span class="comment">// 开启循环播放</span></div><div class="line">    stepX: <span class="number">200</span>, <span class="comment">// 每页宽度为 200px</span></div><div class="line">    stepY: <span class="number">100</span>, <span class="comment">// 每页高度为 100px</span></div><div class="line">    threshold: <span class="number">0.3</span>, <span class="comment">// 滚动距离超过宽度/高度的 30% 时切换图片</span></div><div class="line">    speed: <span class="number">400</span> <span class="comment">// 切换动画时长 400ms</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">this</span>.slide = BScroll(<span class="keyword">this</span>.$refs.slide, options)</div></pre></td></tr></table></figure></p>
+<h2 id="特殊场景"><a href="#特殊场景" class="headerlink" title="特殊场景"></a>特殊场景</h2><p>除了普通滚动列表、选择器、轮播图等基础滚动场景，还可以利用 BetterScroll 提供的能力，做一些特殊场景。</p>
+<h2 id="索引列表"><a href="#索引列表" class="headerlink" title="索引列表"></a>索引列表</h2><p>索引列表，首先需要在滚动过程中实时监听滚动到哪个索引的区域了，来更新当前索引。在这种场景下，我们可以使用probeType选项，当此选项设置为 3 时，会在整个滚动过程中实时派发 scroll 事件。从而获取滚动过程中的位置。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">options.probeType = <span class="number">3</span></div><div class="line"><span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, options)</div><div class="line"></div><div class="line"><span class="keyword">this</span>.scroll.on(<span class="string">'scroll'</span>, (pos) =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> y = pos.y</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listHeight.length - <span class="number">1</span>; i++) &#123;</div><div class="line">    <span class="keyword">let</span> height1 = listHeight[i]</div><div class="line">    <span class="keyword">let</span> height2 = listHeight[i + <span class="number">1</span>]</div><div class="line">    <span class="keyword">if</span> (-y &gt;= height1 &amp;&amp; -y &lt; height2) &#123;</div><div class="line">      <span class="keyword">this</span>.currentIndex = i</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>当点击索引时，使用scrollToElement()方法滚动到该索引区域<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scrollTo(index) &#123;</div><div class="line">  <span class="keyword">this</span>.$refs.indexList.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[index], <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="开屏引导"><a href="#开屏引导" class="headerlink" title="开屏引导"></a>开屏引导</h2><p>开屏引导，其实就是一种不自动循环播放的横向滚动轮播图而已。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">options = &#123;</div><div class="line">  scrollX: <span class="literal">true</span>,</div><div class="line">  snap: &#123;</div><div class="line">    loop: <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">this</span>.slide = BScroll(<span class="keyword">this</span>.$refs.slide, options)</div></pre></td></tr></table></figure></p>
+<p>因为此需求场景一般只有移动端才有，所以最好在手机模式下看效果。</p>
+<h2 id="自由滚动"><a href="#自由滚动" class="headerlink" title="自由滚动"></a>自由滚动</h2><p>freeScroll选项，用于开启自由滚动，允许横向和纵向同时滚动，而不限制在某个方向。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">options.freeScroll = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>另外需要注意的是，此选项在 eventPassthrough 设置了保持原生滚动时无效。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>BetterScroll 可以用于几乎所有滚动场景，本文仅介绍了在一些典型场景下的使用姿势。<br>作为一款旨在解决移动端滚动需求的插件，BetterScroll 开放的众多选项、方法和事件，其实，就是提供了一种让我们更加快捷、灵活、精准时机地处理滚动的能力。<br>转自：滴滴web架构组 <a href="https://juejin.im/post/59dc572c6fb9a0450f20e40e" target="_blank" rel="external">https://juejin.im/post/59dc572c6fb9a0450f20e40e</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -182,25 +261,112 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2017/11/18/BetterScroll移动端解决需求/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/16/详解-CSS-居中布局技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解 CSS 居中布局技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -223,9 +389,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
