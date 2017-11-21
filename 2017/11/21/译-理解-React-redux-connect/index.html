@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>Archives: 2017/3 | 征哥的博客</title>
+  <title>[译] 理解 React-redux connect | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/archives/2017/03/index.html">
+  <meta name="keywords" content="react,redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译] 理解 React-redux connect">
+<meta property="og:url" content="https://zhenggege.github.io/2017/11/21/译-理解-React-redux-connect/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:image" content="https://zhenggege.github.io/img/redux1.png">
+<meta property="og:image" content="https://zhenggege.github.io/img/redux1.png">
+<meta property="og:image" content="https://zhenggege.github.io/img/redux2.png">
+<meta property="og:image" content="https://zhenggege.github.io/img/redux3.png">
+<meta property="og:image" content="https://zhenggege.github.io/img/redux4.png">
+<meta property="og:updated_time" content="2017-11-21T01:45:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="[译] 理解 React-redux connect">
+<meta name="twitter:image" content="https://zhenggege.github.io/img/redux1.png">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,60 +147,232 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-译-理解-React-redux-connect" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/07/mongodb用法/" class="archive-article-date">
-  	<time datetime="2017-03-07T06:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/07/mongodb用法/">mongodb用法</a>
+    <h1 class="article-title" itemprop="name">
+      [译] 理解 React-redux connect
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/11/21/译-理解-React-redux-connect/" class="archive-article-date">
+  	<time datetime="2017-11-21T01:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/img/redux1.png" width="500px" height="300px"></p>
+<a id="more"></a>
+<p>Redux 是一个非常简单库，主要目的是进行状态管理，它使得 React 开发变得更加容易。然鹅很多人都只是简单的使用 Redux 官网提供的样板代码，把它和 React 应用结合起来，却并不理解这两者到底是如何结合并且运作的。</p>
+<p>有一个库叫做 React-redux，它唯一的目的就是把 redux 的状态管理机制无缝衔接到 react 应用上。我认为当使用了一些构成了你应用核心的东西的时候，还是非常应该了解具体发生了什么的。</p>
+<h2 id="React-和-redux-本身"><a href="#React-和-redux-本身" class="headerlink" title="React 和 redux 本身"></a>React 和 redux 本身</h2><p>对于某些人来说，也许很难相信 redux 和 react 实际上是两个独立的库这件事情，它们完全可以独立使用。<br>我们先来看一下 redux 的状态（state）管理机制:</p>
+<p><img src="/img/redux1.png" width="500px" height="300px"></p>
+<p>如果你之前曾经使用过 redux，你就知道 redux 主要是围绕着 “store” 来运转的，它的 store 就是用来保存应用里所有的 state 的地方。任何人都不能直接修改 store，只能通过 reducers 来修改 store 里的数据，而想要触发 reducers 我们需要派发 actions。所以最终：</p>
+<blockquote>
+<p>To change data, we need to dispatch an action</p>
+<p>想要改变数据，我们需要派发一个 action</p>
+</blockquote>
+<p>另一方面，如果我们想要获取数据，也不能直接从 store 里取。而是通过 store.getState() 来得到当时 store 里所有数据的 “快照”，也即是获取了我们调用 getState 时整个程序的状态</p>
+<blockquote>
+<p>To obtain data we need to get the current state of the store</p>
+<p>想要获取数据，我们需要得到 store 里的状态</p>
+</blockquote>
+<p>接下来我们看一下一个标准 React todo 应用的组件结构。</p>
+<p><img src="/img/redux2.png" width="500px" height="300px"></p>
+<h2 id="把-React-和-Redux-结合起来"><a href="#把-React-和-Redux-结合起来" class="headerlink" title="把 React 和 Redux 结合起来"></a>把 React 和 Redux 结合起来</h2><p>如果想把 redux store 和我们的 react 应用链接起来，那么首先需要让应用知道 store 的存在。这也即是 react-redux 库的第一个主要部分 Provider。</p>
+<p>Provider 其实是 react-redux 提供的一个 React 组件，它只有一个作用，就是把 store “提供 provide” 给它的子组件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This is the store we create with redux's createStore method</span></div><div class="line"><span class="keyword">const</span> store = createStore(todoApp,&#123;&#125;)</div><div class="line"></div><div class="line"><span class="comment">// Provider is given the store as a prop</span></div><div class="line">render(  </div><div class="line">  &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">    &lt;App/&gt;</div><div class="line">  &lt;<span class="regexp">/Provider&gt;, document.getElementById('app-node'))</span></div></pre></td></tr></table></figure>
+<p>既然只有 provider 的子组件能获取到 store，而我们一般又希望能让整个应用获取到 store，那么最明智的做法就是把 App 组件放到 Provider 里。</p>
+<p>按照上面两幅图的思路，我们应该把 Provider 放在 App 上面表示是 App 的父组件，然而考虑到 Provider 提供的功能，把它表示成包裹着整个应用树的形式更为合适，如下图：</p>
+<p><img src="/img/redux3.png" width="500px" height="300px"></p>
+<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2><p>既然已经把 redux store “provide” 给了我们的应用，接下来就可以把应用里的组件和它 connect 起来了。还记得前面强调的不能直接和 store 交互吗？我们只能通过获取应用的状态来获取 store 里的数据，或者通过派发 action 来改变应用的状态：我们只能获取到上面 redux 流程图里最顶部（dispatch）和最底部（State）的元素。</p>
+<p>这些正是 connect 的功能：把 redux 的 dispatch 和 state 映射为 react 组件的 props！（看下面这段代码）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;connect&#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> TodoItem = <span class="function">(<span class="params">&#123;todo, destroyTodo&#125;</span>) =&gt;</span> &#123;  </div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &#123;todo.text&#125;</div><div class="line">      &lt;span onClick=&#123;destroyTodo&#125;&gt; x &lt;<span class="regexp">/span&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>div&gt;</div><div class="line">  )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> mapStateToProps = <span class="function"><span class="params">state</span> =&gt;</span> &#123;  </div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    todo : state.todos[<span class="number">0</span>]</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function"><span class="params">dispatch</span> =&gt;</span> &#123;  </div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    destroyTodo : <span class="function"><span class="params">()</span> =&gt;</span> dispatch(&#123;</div><div class="line">      type : <span class="string">'DESTROY_TODO'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(  </div><div class="line">  mapStateToProps,</div><div class="line">  mapDispatchToProps</div><div class="line">)(TodoItem)</div></pre></td></tr></table></figure>
+<p>mapStateToProps 和 mapDispatchToProps 是两个春函数，分别用来获取 store “state” 和 “dispatch” 。具体来说，这两个函数各返回一个对象，对象的 keys 将作为 props 传递给它们所连接的组件。</p>
+<p>这上面这个例子中，mapStateToProps 返回了一个对象只有一个 key: todo。mapDispatchToProps 返回了一个拥有 key destroyTodo 的对象。</p>
+<p>被连结的组件(也就是最后被 export 的那个组件)，把 todo 和 destroyTodo 传递给 TodoItem 做 props。</p>
+<p><img src="/img/redux4.png" width="500px" height="300px"></p>
+<p>尤其需要注意的是，只有在 Provider 内的组件才能被连结（connect）。从上面的图表可以看到，连结是通过 Provider 建立的。</p>
+<p>Redux 是一个非常强大的工具，尤其是当与 React 组合在一起使用时。明白 react-redux 的各个部分是如何使用以及为什么使用会很有帮助，希望阅读完这篇文章，你能清楚 Provider 和 ‘connect’ 的具体功能。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2017/11/21/译-理解-React-redux-connect/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/16/详解-CSS-居中布局技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解 CSS 居中布局技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -219,8 +395,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
