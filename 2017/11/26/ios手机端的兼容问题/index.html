@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>征哥的博客</title>
+  <title>ios手机端的兼容问题(持续更新) | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/index.html">
+  <meta name="description" content="1.去除ios页面的input、textarea的自带效果（阴影、等）1input,textarea &amp;#123;-webkit-appearance:none;&amp;#125; 2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。http://www.w3cplus.com/css3/advanced-css-filters.html  此处在大漠大神的博客学到好多。12backd">
+<meta name="keywords" content="兼容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios手机端的兼容问题(持续更新)">
+<meta property="og:url" content="https://zhenggege.github.io/2017/11/26/ios手机端的兼容问题/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="1.去除ios页面的input、textarea的自带效果（阴影、等）1input,textarea &amp;#123;-webkit-appearance:none;&amp;#125; 2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。http://www.w3cplus.com/css3/advanced-css-filters.html  此处在大漠大神的博客学到好多。12backd">
+<meta property="og:updated_time" content="2017-11-26T15:34:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="ios手机端的兼容问题(持续更新)">
+<meta name="twitter:description" content="1.去除ios页面的input、textarea的自带效果（阴影、等）1input,textarea &amp;#123;-webkit-appearance:none;&amp;#125; 2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。http://www.w3cplus.com/css3/advanced-css-filters.html  此处在大漠大神的博客学到好多。12backd">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,16 +144,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-ios手机端的兼容问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ios手机端的兼容问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/26/ios手机端的兼容问题/">ios手机端的兼容问题(持续更新)</a>
+    <h1 class="article-title" itemprop="name">
+      ios手机端的兼容问题(持续更新)
     </h1>
   
 
@@ -167,11 +166,68 @@
       
         <h2 id="1-去除ios页面的input、textarea的自带效果（阴影、等）"><a href="#1-去除ios页面的input、textarea的自带效果（阴影、等）" class="headerlink" title="1.去除ios页面的input、textarea的自带效果（阴影、等）"></a>1.去除ios页面的input、textarea的自带效果（阴影、等）</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>,<span class="selector-tag">textarea</span> &#123;<span class="attribute">-webkit-appearance</span>:none;&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-iOS系统上常常能看到高斯模糊-Gaussian-Blur-效果。"><a href="#2-iOS系统上常常能看到高斯模糊-Gaussian-Blur-效果。" class="headerlink" title="2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。"></a>2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。</h2><p><a href="http://www.w3cplus.com/css3/advanced-css-filters.html" target="_blank" rel="external">http://www.w3cplus.com/css3/advanced-css-filters.html</a>  此处在大漠大神的博客学到好多。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">backdrop-filter</span>：<span class="selector-tag">blur</span>(10<span class="selector-tag">px</span>);</div><div class="line">//只支持ios端；只作用于当前元素；</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/11/26/ios手机端的兼容问题/#more">more >></a>
-        
+<a id="more"></a>
+<p>到目前为止，仅有Safari浏览器支持，而且还需要添加前缀：-webkit-backdrop-filter</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-webkit-tap-highlight-color:rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>);</div><div class="line"><span class="comment">//可以同时屏蔽ios和android下点击元素时出现的阴影。备transparent的属性值在android下无效。</span></div></pre></td></tr></table></figure>
+<h2 id="4"><a href="#4" class="headerlink" title="4. "></a>4. </h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">border-radius:<span class="number">0</span>;   <span class="comment">//改掉ios默认的曲边框。</span></div></pre></td></tr></table></figure>
+<h2 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h2><p>当文本框只能输入数字是一个很常见的需求，比如电话号码，身份证号，卡号， 数量….等等只允许数字输入，为了更好的用户体验性，直接写出 启动数字键盘的需求，我和大多数人一样用this.style.imeMode=’disabled’;<br>imeMode有四种形式，分别是：</p>
+<blockquote>
+<p>active 代表输入法为中文<br>inactive 代表输入法为英文<br>auto 代表打开输入法 (默认)<br>disable 代表关闭输入法<br>发现在Android手机上是不行的。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解决办法：html5里的 input 的type属性可设置为 number  </span></div><div class="line">&lt;input type=<span class="string">"number"</span> &gt;弹出数字键盘</div></pre></td></tr></table></figure>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
       
     </div>
     <div class="article-info article-info-index">
@@ -191,16 +247,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/26/ios手机端的兼容问题/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2017/11/26/ios手机端的兼容问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/21/译-理解-React-redux-connect/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[译] 理解 React-redux connect</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -220,716 +335,14 @@
 
 
 
-
   
-    <article id="post-译-理解-React-redux-connect" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/译-理解-React-redux-connect/">[译] 理解 React-redux connect</a>
-    </h1>
   
 
-        
-        <a href="/2017/11/21/译-理解-React-redux-connect/" class="archive-article-date">
-  	<time datetime="2017-11-21T01:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/redux1.png" width="500px" height="300px"></p>
-        
-          <a class="article-more-a" href="/2017/11/21/译-理解-React-redux-connect/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/译-理解-React-redux-connect/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-详解-CSS-居中布局技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/16/详解-CSS-居中布局技巧/">详解 CSS 居中布局技巧</a>
-    </h1>
   
 
-        
-        <a href="/2017/11/16/详解-CSS-居中布局技巧/" class="archive-article-date">
-  	<time datetime="2017-11-16T01:07:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/fengjing.jpg" width="500px" height="300px"><br>
-        
-          <a class="article-more-a" href="/2017/11/16/详解-CSS-居中布局技巧/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/16/详解-CSS-居中布局技巧/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-react学习中踩到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/react学习中踩到的坑/">react学习中踩到的坑</a>
-    </h1>
   
 
-        
-        <a href="/2017/11/09/react学习中踩到的坑/" class="archive-article-date">
-  	<time datetime="2017-11-08T16:01:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一次一次的踩坑，一次一次的解决  – 提升</p>
-<p><img src="/img/favicon.png" width="200px" height="200px"></p>
-        
-          <a class="article-more-a" href="/2017/11/09/react学习中踩到的坑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/09/react学习中踩到的坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BetterScroll移动端解决需求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/BetterScroll移动端解决需求/">BetterScroll</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/10/BetterScroll移动端解决需求/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>BetterScroll 是一款重点解决移动端各种滚动场景需求的开源插件（GitHub地址），适用于滚动列表、选择器、轮播图、索引列表、开屏引导等应用场景。<br>为了满足这些场景，它不仅支持惯性滚动、边界回弹、滚动条淡入淡出等效果的灵活配置，让滚动更加流畅，同时还提供了很多 API 方法和事件，以便我们更快地实现滚动场景下的需求，如下拉刷新、上拉加载。<br>由于它基于原生 JavaScript 实现，不依赖任何框架，所以既可以原生 JavaScript 引用，也可以与目前前端 MVVM 框架结合使用，比如，其官网上的示例就是与 Vue 的结合。<br>首先，让我们来看一下它是怎样让滚动更流畅的吧。<br>
-        
-          <a class="article-more-a" href="/2017/10/10/BetterScroll移动端解决需求/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/BetterScroll移动端解决需求/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mongodb用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/07/mongodb用法/">mongodb用法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/07/mongodb用法/" class="archive-article-date">
-  	<time datetime="2017-03-07T06:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>mongoose<br><br><br>MongoDB是一个开源的NoSQL数据库，相比MySQL那样的关系型数据库，它更显得轻巧、灵活，非常适合在数据规模很大、事务性不强的场合下使用。同时它也是一个对象数据库，没有表、行等概念，也没有固定的模式和结构，所有的数据以文档的形式存储(文档，就是一个关联数组式的对象，它的内部由属性组成，一个属性对应的值可能是一个数、字符串、日期、数组，甚至是一个嵌套的文档。)，数据格式就是JSON。<br>
-        
-          <a class="article-more-a" href="/2017/03/07/mongodb用法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/07/mongodb用法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深度剖析-如何实现一个Virtual-DOM-算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">深度剖析：如何实现一个 Virtual DOM 算法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/" class="archive-article-date">
-  	<time datetime="2017-02-10T05:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/vdom3.png" width="500px" height="300px"><br>
-        
-          <a class="article-more-a" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-co源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/01/co源码解析/">co源码解析</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/01/co源码解析/" class="archive-article-date">
-  	<time datetime="2017-01-01T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###<br>co 是著名的 TJ 于 2013 年推出的一个利用 ES6 的 Generator 函数来解决异步操作的开源项目，也是后来 JavaScript 异步操作的终极解决方案—— async/await 的先驱。时至今日，co 版本号已经来到了 4.x，不过其代码仍然只有寥寥数百行，十分适合阅读与学习。下面我们就来看一下 co 是如何对异步操作进行处理的。</p>
-<p>首先先来看一下 co 的基本用法。co 使用起来十分方便，只需要将一个 Generator 函数作为参数传给 co()，就能在该函数中像同步代码一样编写异步代码。看一下官方示例：</p>
-        
-          <a class="article-more-a" href="/2017/01/01/co源码解析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/01/co源码解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/04/git命令/">git</a>
-    </h1>
-  
-
-        
-        <a href="/2016/11/04/git命令/" class="archive-article-date">
-  	<time datetime="2016-11-04T01:30:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>初始化本地git仓库（创建新仓库）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
-<p>配置用户名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;xxx&quot;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2016/11/04/git命令/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/04/git命令/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-开通博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/30/开通博客/">开通博客</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/30/开通博客/" class="archive-article-date">
-  	<time datetime="2016-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h3 id="开通博客"><a href="#开通博客" class="headerlink" title="开通博客"></a>开通博客</h3><p>2016年10.30，博客开通</p>
-<p>在这里记录下生活@_@</p>
-<p>后续会把之前写过的笔记和看过的比较好的文章移到这个博客<br>
-        
-          <a class="article-more-a" href="/2016/10/30/开通博客/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/30/开通博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -952,8 +365,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
