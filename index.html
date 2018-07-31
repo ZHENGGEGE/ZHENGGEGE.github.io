@@ -145,6 +145,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vue.js源码构建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/11/vue.js源码构建/">Vue.js 源码构建</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/11/vue.js源码构建/" class="archive-article-date">
+  	<time datetime="2018-08-10T16:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>#Vue.js 源码构建</p>
+<p>Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。</p>
+<h2 id="构建脚本"><a href="#构建脚本" class="headerlink" title="构建脚本"></a>构建脚本</h2><p>通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。</p>
+<p>我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"script"</span>: &#123;</div><div class="line">    <span class="string">"build"</span>: <span class="string">"node scripts/build.js"</span>,</div><div class="line">    <span class="string">"build:ssr"</span>: <span class="string">"npm run build -- web-runtime-cjs,web-server-renderer"</span>,</div><div class="line">    <span class="string">"build:weex"</span>: <span class="string">"npm run build --weex"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/08/11/vue.js源码构建/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/11/vue.js源码构建/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue源码目录设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -817,86 +898,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/03/07/mongodb用法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深度剖析-如何实现一个Virtual-DOM-算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">深度剖析：如何实现一个 Virtual DOM 算法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/" class="archive-article-date">
-  	<time datetime="2017-02-10T05:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/vdom3.png" width="500px" height="300px"><br>
-        
-          <a class="article-more-a" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">展开全文 >></a>
         </p>
       
 

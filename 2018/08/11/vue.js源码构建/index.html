@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>Archives | 征哥的博客</title>
+  <title>Vue.js 源码构建 | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/archives/index.html">
+  <meta name="description" content="#Vue.js 源码构建 Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。 构建脚本通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。 我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下： 1234567&amp;#123;">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js 源码构建">
+<meta property="og:url" content="https://zhenggege.github.io/2018/08/11/vue.js源码构建/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="#Vue.js 源码构建 Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。 构建脚本通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。 我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下： 1234567&amp;#123;">
+<meta property="og:updated_time" content="2018-07-31T16:17:14.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="Vue.js 源码构建">
+<meta name="twitter:description" content="#Vue.js 源码构建 Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。 构建脚本通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。 我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下： 1234567&amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,36 +144,120 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-vue.js源码构建" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Vue.js 源码构建
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/11/vue.js源码构建/" class="archive-article-date">
+
+        
+        <a href="/2018/08/11/vue.js源码构建/" class="archive-article-date">
   	<time datetime="2018-08-10T16:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/11/vue.js源码构建/">Vue.js 源码构建</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>#Vue.js 源码构建</p>
+<p>Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。</p>
+<h2 id="构建脚本"><a href="#构建脚本" class="headerlink" title="构建脚本"></a>构建脚本</h2><p>通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。</p>
+<p>我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"script"</span>: &#123;</div><div class="line">    <span class="string">"build"</span>: <span class="string">"node scripts/build.js"</span>,</div><div class="line">    <span class="string">"build:ssr"</span>: <span class="string">"npm run build -- web-runtime-cjs,web-server-renderer"</span>,</div><div class="line">    <span class="string">"build:weex"</span>: <span class="string">"npm run build --weex"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>这里总共有 3 条命令，作用都是构建 Vue.js，后面 2 条是在第一条命令的基础上，添加一些环境参数。</p>
+<p>当在命令行运行 npm run build 的时候，实际上就会执行 node scripts/build.js，接下来我们来看看它实际是怎么构建的。</p>
+<p>##构建过程</p>
+<p>我们对于构建过程分析是基于源码的，先打开构建的入口 JS 文件，在 scripts/build.js 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> builds = <span class="built_in">require</span>(<span class="string">'./config'</span>).getAllBuilds()</div><div class="line"></div><div class="line"><span class="comment">// filter builds via command line arg</span></div><div class="line"><span class="keyword">if</span> (process.argv[<span class="number">2</span>]) &#123;</div><div class="line">  <span class="keyword">const</span> filters = process.argv[<span class="number">2</span>].split(<span class="string">','</span>)</div><div class="line">  builds = builds.filter(<span class="function"><span class="params">b</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> filters.some(<span class="function"><span class="params">f</span> =&gt;</span> b.output.file.indexOf(f) &gt; <span class="number">-1</span> || b._name.indexOf(f) &gt; <span class="number">-1</span>)</div><div class="line">  &#125;)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="comment">// filter out weex builds by default</span></div><div class="line">  builds = builds.filter(<span class="function"><span class="params">b</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> b.output.file.indexOf(<span class="string">'weex'</span>) === <span class="number">-1</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">build(builds)</div></pre></td></tr></table></figure>
+<p>这段代码逻辑非常简单，先从配置文件读取配置，再通过命令行参数对构建配置做过滤，这样就可以构建出不同用途的 Vue.js 了。接下来我们看一下配置文件，在 scripts/config.js 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> builds = &#123;</div><div class="line">  <span class="comment">// Runtime only (CommonJS). Used by bundlers e.g. Webpack &amp; Browserify</span></div><div class="line">  <span class="string">'web-runtime-cjs'</span>: &#123;</div><div class="line">    entry: resolve(<span class="string">'web/entry-runtime.js'</span>),</div><div class="line">    dest: resolve(<span class="string">'dist/vue.runtime.common.js'</span>),</div><div class="line">    format: <span class="string">'cjs'</span>,</div><div class="line">    banner</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// Runtime+compiler CommonJS build (CommonJS)</span></div><div class="line">  <span class="string">'web-full-cjs'</span>: &#123;</div><div class="line">    entry: resolve(<span class="string">'web/entry-runtime-with-compiler.js'</span>),</div><div class="line">    dest: resolve(<span class="string">'dist/vue.common.js'</span>),</div><div class="line">    format: <span class="string">'cjs'</span>,</div><div class="line">    alias: &#123; <span class="attr">he</span>: <span class="string">'./entity-decoder'</span> &#125;,</div><div class="line">    banner</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// Runtime only (ES Modules). Used by bundlers that support ES Modules,</span></div><div class="line">  <span class="comment">// e.g. Rollup &amp; Webpack 2</span></div><div class="line">  <span class="string">'web-runtime-esm'</span>: &#123;</div><div class="line">    entry: resolve(<span class="string">'web/entry-runtime.js'</span>),</div><div class="line">    dest: resolve(<span class="string">'dist/vue.runtime.esm.js'</span>),</div><div class="line">    format: <span class="string">'es'</span>,</div><div class="line">    banner</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">// Runtime+compiler CommonJS build (ES Modules)</span></div><div class="line">  <span class="string">'web-full-esm'</span>: &#123;</div><div class="line">    entry: resolve(<span class="string">'web/entry-runtime-with-compiler.js'</span>)</div></pre></td></tr></table></figure>
+<p>  这里列举了一些 Vue.js 构建的配置，关于还有一些服务端渲染 webpack 插件以及 weex 的打包配置就不列举了。</p>
+<p>对于单个配置，它是遵循 Rollup 的构建规则的。其中 entry 属性表示构建的入口 JS 文件地址，dest 属性表示构建后的 JS 文件地址。format 属性表示构建的格式，cjs 表示构建出来的文件遵循 CommonJS 规范，es 表示构建出来的文件遵循 ES Module 规范。 umd 表示构建出来的文件遵循 UMD 规范。</p>
+<p>以 web-runtime-cjs 配置为例，它的 entry 是<br>resolve(‘web/entry-runtime.js’)，先来看一下 resolve 函数的定义。</p>
+<p>源码目录：scripts/config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> aliases = <span class="built_in">require</span>(<span class="string">'./alias'</span>)</div><div class="line"><span class="keyword">const</span> resolve = <span class="function"><span class="params">p</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> base = p.split(<span class="string">'/'</span>)[<span class="number">0</span>]</div><div class="line">  <span class="keyword">if</span> (aliases[base]) &#123;</div><div class="line">    <span class="keyword">return</span> path.resolve(aliases[base], p.slice(base.length + <span class="number">1</span>))</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> path.resolve(__dirname, <span class="string">'../'</span>, p)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的 resolve 函数实现非常简单，它先把 resolve 函数传入的参数 p 通过 / 做了分割成数组，然后取数组第一个元素设置为 base。在我们这个例子中，参数 p 是 web/entry-runtime.js，那么 base 则为 web。base 并不是实际的路径，它的真实路径借助了别名的配置，我们来看一下别名配置的代码，在 scripts/alias 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  vue: path.resolve(__dirname, <span class="string">'../src/platforms/web/entry-runtime-with-compiler'</span>),</div><div class="line">  compiler: path.resolve(__dirname, <span class="string">'../src/compiler'</span>),</div><div class="line">  core: path.resolve(__dirname, <span class="string">'../src/core'</span>),</div><div class="line">  shared: path.resolve(__dirname, <span class="string">'../src/shared'</span>),</div><div class="line">  web: path.resolve(__dirname, <span class="string">'../src/platforms/web'</span>),</div><div class="line">  weex: path.resolve(__dirname, <span class="string">'../src/platforms/weex'</span>),</div><div class="line">  server: path.resolve(__dirname, <span class="string">'../src/server'</span>),</div><div class="line">  entries: path.resolve(__dirname, <span class="string">'../src/entries'</span>),</div><div class="line">  sfc: path.resolve(__dirname, <span class="string">'../src/sfc'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>很显然，这里 web 对应的真实的路径是 path.resolve(__dirname, ‘../src/platforms/web’)，这个路径就找到了 Vue.js 源码的 web 目录。然后 resolve 函数通过 path.resolve(aliases[base], p.slice(base.length + 1)) 找到了最终路径，它就是 Vue.js 源码 web 目录下的 entry-runtime.js。因此，web-runtime-cjs 配置对应的入口文件就找到了。</p>
+<p>它经过 Rollup 的构建打包后，最终会在 dist 目录下生成 vue.runtime.common.js。</p>
+<p>##Runtime Only VS Runtime+Compiler</p>
+<p>通常我们利用 vue-cli 去初始化我们的 Vue.js 项目的时候会询问我们用 Runtime Only 版本的还是 Runtime+Compiler 版本。下面我们来对比这两个版本。</p>
+<ul>
+<li>Runtime Only</li>
+</ul>
+<p>我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 JavaScript，因为是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。</p>
+<ul>
+<li>Runtime+Compiler</li>
+</ul>
+<p>我们如果没有对代码做预编译，但又使用了 Vue 的 template 属性并传入一个字符串，则需要在客户端编译模板，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 需要编译器的版本</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  template: <span class="string">'&lt;div&gt;&#123;&#123; hi &#125;&#125;&lt;/div&gt;'</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 这种情况不需要</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  render (h) &#123;</div><div class="line">    <span class="keyword">return</span> h(<span class="string">'div'</span>, <span class="keyword">this</span>.hi)</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>因为在 Vue.js 2.0 中，最终渲染都是通过 render 函数，如果写 template 属性，则需要编译成 render 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。</p>
+<p>很显然，这个编译过程对性能会有一定损耗，所以通常我们更推荐使用 Runtime-Only 的 Vue.js。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,549 +269,106 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/31/vue源码目录设计/" class="archive-article-date">
-  	<time datetime="2018-07-31T15:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/31/vue源码目录设计/">Vue.js 源码目录设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/19/Websocket原理/" class="archive-article-date">
-  	<time datetime="2018-05-19T05:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/Websocket原理/">websocket原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/13/2017年总结。/" class="archive-article-date">
-  	<time datetime="2018-02-13T06:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/13/2017年总结。/">2017年总结。</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/11/几种协议/" class="archive-article-date">
-  	<time datetime="2017-12-11T15:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/11/几种协议/">几种协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
   </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/26/ios手机端的兼容问题/" class="archive-article-date">
-  	<time datetime="2017-11-26T15:21:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/26/ios手机端的兼容问题/">ios手机端的兼容问题(持续更新)</a>
-    </h1>
-  
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">兼容</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2018/08/11/vue.js源码构建/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/21/译-理解-React-redux-connect/" class="archive-article-date">
-  	<time datetime="2017-11-21T01:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/21/译-理解-React-redux-connect/">[译] 理解 React-redux connect</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/16/详解-CSS-居中布局技巧/" class="archive-article-date">
-  	<time datetime="2017-11-16T01:07:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/16/详解-CSS-居中布局技巧/">详解 CSS 居中布局技巧</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/BetterScroll移动端解决需求/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/BetterScroll移动端解决需求/">BetterScroll</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/07/mongodb用法/" class="archive-article-date">
-  	<time datetime="2017-03-07T06:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/07/mongodb用法/">mongodb用法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/" class="archive-article-date">
-  	<time datetime="2017-02-10T05:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">深度剖析：如何实现一个 Virtual DOM 算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/co源码解析/" class="archive-article-date">
-  	<time datetime="2017-01-01T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/01/co源码解析/">co源码解析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+<div class="mask js-mask"></div>
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/30/git命令/" class="archive-article-date">
-  	<time datetime="2016-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/30/git命令/">git使用说明</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/30/开通博客/" class="archive-article-date">
-  	<time datetime="2016-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/31/vue源码目录设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue.js 源码目录设计</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/30/开通博客/">开通博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -749,8 +391,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
