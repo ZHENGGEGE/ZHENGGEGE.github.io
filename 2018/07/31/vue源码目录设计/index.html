@@ -6,23 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>websocket原理 | 征哥的博客</title>
+  <title>Vue.js 源码目录设计 | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、websocket与httpWebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算） 首先HTTP有 1.1 和 1.0 之说，也就是所谓的 keep-alive ，把多个HTTP请求合并为一个，但是 Websocket 其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，">
-<meta name="keywords" content="协议">
+  <meta name="description" content="#Vue.js 源码目录设计 Vue.js 的源码都在 src 目录下，其目录结构如下。 1234567src├── compiler        # 编译相关 ├── core            # 核心代码 ├── platforms       # 不同平台的支持├── server          # 服务端渲染├── sfc             # .vue 文件解析├──">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="websocket原理">
-<meta property="og:url" content="https://zhenggege.github.io/2018/05/19/Websocket原理/index.html">
+<meta property="og:title" content="Vue.js 源码目录设计">
+<meta property="og:url" content="https://zhenggege.github.io/2018/07/31/vue源码目录设计/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="一、websocket与httpWebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算） 首先HTTP有 1.1 和 1.0 之说，也就是所谓的 keep-alive ，把多个HTTP请求合并为一个，但是 Websocket 其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，">
-<meta property="og:image" content="https://zhenggege.github.io/img/webscoket原理/httpwebsocket.png">
-<meta property="og:image" content="https://zhenggege.github.io/img/webscoket原理/geili.png">
-<meta property="og:image" content="https://zhenggege.github.io/img/webscoket原理/luomu.png">
-<meta property="og:updated_time" content="2018-05-19T05:09:27.600Z">
+<meta property="og:description" content="#Vue.js 源码目录设计 Vue.js 的源码都在 src 目录下，其目录结构如下。 1234567src├── compiler        # 编译相关 ├── core            # 核心代码 ├── platforms       # 不同平台的支持├── server          # 服务端渲染├── sfc             # .vue 文件解析├──">
+<meta property="og:updated_time" content="2018-07-31T15:44:17.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="websocket原理">
-<meta name="twitter:description" content="一、websocket与httpWebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算） 首先HTTP有 1.1 和 1.0 之说，也就是所谓的 keep-alive ，把多个HTTP请求合并为一个，但是 Websocket 其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，">
-<meta name="twitter:image" content="https://zhenggege.github.io/img/webscoket原理/httpwebsocket.png">
+<meta name="twitter:title" content="Vue.js 源码目录设计">
+<meta name="twitter:description" content="#Vue.js 源码目录设计 Vue.js 的源码都在 src 目录下，其目录结构如下。 1234567src├── compiler        # 编译相关 ├── core            # 核心代码 ├── platforms       # 不同平台的支持├── server          # 服务端渲染├── sfc             # .vue 文件解析├──">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -148,82 +144,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Websocket原理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue源码目录设计" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      websocket原理
+      Vue.js 源码目录设计
     </h1>
   
 
         
-        <a href="/2018/05/19/Websocket原理/" class="archive-article-date">
-  	<time datetime="2018-05-19T05:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
+        <a href="/2018/07/31/vue源码目录设计/" class="archive-article-date">
+  	<time datetime="2018-07-31T15:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、websocket与http"><a href="#一、websocket与http" class="headerlink" title="一、websocket与http"></a>一、websocket与http</h2><p>WebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）</p>
-<p>首先HTTP有 <strong>1.1</strong> 和 <strong>1.0</strong> 之说，也就是所谓的 <strong>keep-alive</strong> ，把多个HTTP请求合并为一个，但是 <strong>Websocket</strong> 其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充.可以通过这样一张图理解</p>
-<p><img src="/img/webscoket原理/httpwebsocket.png" width="200px" height="100px"></p>
+        <hr>
+<p>#Vue.js 源码目录设计</p>
+<p>Vue.js 的源码都在 src 目录下，其目录结构如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src</div><div class="line">├── compiler        # 编译相关 </div><div class="line">├── core            # 核心代码 </div><div class="line">├── platforms       # 不同平台的支持</div><div class="line">├── server          # 服务端渲染</div><div class="line">├── sfc             # .vue 文件解析</div><div class="line">├── shared          # 共享代码</div></pre></td></tr></table></figure>
+<h2 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h2><p>compiler 目录包含 Vue.js 所有编译相关的代码。它包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。</p>
+<p>编译的工作可以在构建时做（借助 webpack、vue-loader 等辅助插件）；也可以在运行时做，使用包含构建功能的 Vue.js。显然，编译是一项耗性能的工作，所以更推荐前者——离线编译。</p>
 <a id="more"></a>
-<p>有交集，但是并不是全部。另外Html5是指的一系列新的API，或者说新规范，新技术。Http协议本身只有1.0和1.1，而且跟Html本身没有直接关系。。通俗来说，你可以用HTTP协议传输非Html数据，就是这样=。=再简单来说，层级不一样。</p>
-<h2 id="二、Websocket是什么样的协议，具体有什么优点"><a href="#二、Websocket是什么样的协议，具体有什么优点" class="headerlink" title="二、Websocket是什么样的协议，具体有什么优点"></a>二、Websocket是什么样的协议，具体有什么优点</h2><p>首先，Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。HTTP的生命周期通过 <strong>Request</strong> 来界定，也就是一个 <strong>Request</strong> 一个 <strong>Response</strong> ，那么在 HTTP1.0 中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 <strong>Request = Response</strong> ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。教练，你BB了这么多，跟Websocket有什么关系呢？<em>(:з」∠)</em>好吧，我正准备说Websocket呢。。首先Websocket是基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。首先我们来看个典型的 Websocket 握手（借用Wikipedia的。。）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /chat HTTP/1.1</div><div class="line">Host: server.example.com</div><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div><div class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line">Sec-WebSocket-Protocol: chat, superchat</div><div class="line">Sec-WebSocket-Version: 13</div><div class="line">Origin: http://example.com</div></pre></td></tr></table></figure>
-<p>熟悉HTTP的童鞋可能发现了，这段类似HTTP协议的握手请求中，多了几个东西。我会顺便讲解下作用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div></pre></td></tr></table></figure>
-<p>这个就是Websocket的核心了，告诉 Apache 、 Nginx 等服务器：注意啦，我发起的是Websocket协议，快点帮我找到对应的助理处理~不是那个老土的HTTP。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line">Sec-WebSocket-Protocol: chat, superchat</div><div class="line">Sec-WebSocket-Version: 13</div></pre></td></tr></table></figure>
-<p>首先， Sec-WebSocket-Key 是一个 Base64 encode 的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠窝，我要验证尼是不是真的是Websocket助理。</p>
-<p>然后， Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议。简单理解：今晚我要服务A，别搞错啦</p>
-<p>~最后， Sec-WebSocket-Version 是告诉服务器所使用的 Websocket Draft（协议版本），在最初的时候，Websocket协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，什么Firefox和Chrome用的不是一个版本之类的，当初Websocket协议太多可是一个大难题。。不过现在还好，已经定下来啦~大家都使用的一个东西~ 脱水： 服务员，我要的是13岁的噢→_→</p>
-<p>然后服务器会返回下列东西，表示已经接受到请求， 成功建立Websocket啦！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 101 Switching Protocols</div><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div><div class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</div><div class="line">Sec-WebSocket-Protocol: chat</div></pre></td></tr></table></figure>
-<p>这里开始就是HTTP最后负责的区域了，告诉客户，我已经成功切换协议啦</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~Upgrade: websocket</div><div class="line">Connection: Upgrade</div></pre></td></tr></table></figure>
-<p>依然是固定的，告诉客户端即将升级的是 Websocket 协议，而不是mozillasocket，lurnarsocket或者shitsocket。</p>
-<p>然后， Sec-WebSocket-Accept 这个则是经过服务器确认，并且加密过后的 Sec-WebSocket-Key 。 服务器：好啦好啦，知道啦，给你看我的ID CARD来证明行了吧。。</p>
-<p>后面的， Sec-WebSocket-Protocol 则是表示最终使用的协议。</p>
-<p>至此，HTTP已经完成它所有工作了，接下来就是完全按照Websocket协议进行了。具体的协议就不在这阐述了。</p>
-<p>——————技术解析部分完毕——————</p>
-<p><img src="/img/webscoket原理/geili.png" width="200px" height="250px"></p>
-<p>你TMD又BBB了这么久，那到底Websocket有什么鬼用， http long poll ，或者ajax轮询 不都可以实现实时信息传递么。</p>
-<p><img src="/img/webscoket原理/luomu.png" width="150px" height="200px"></p>
-<p>好好好，年轻人，那我们来讲一讲Websocket有什么用。</p>
-<h2 id="三、Websocket的作用"><a href="#三、Websocket的作用" class="headerlink" title="三、Websocket的作用"></a>三、Websocket的作用</h2><p>在讲Websocket之前，我就顺带着讲下 long poll 和 ajax轮询 的原理。ajax轮询ajax轮询的原理非常简单，让浏览器隔个几秒就发送一次请求，询问服务器是否有新信息。</p>
-<p>场景再现：</p>
-<h4 id="客户端：啦啦啦，有没有新信息-Request"><a href="#客户端：啦啦啦，有没有新信息-Request" class="headerlink" title="客户端：啦啦啦，有没有新信息(Request)"></a>客户端：啦啦啦，有没有新信息(Request)</h4><h4 id="服务端：没有（Response）"><a href="#服务端：没有（Response）" class="headerlink" title="服务端：没有（Response）"></a>服务端：没有（Response）</h4><h4 id="客户端：啦啦啦，有没有新信息-Request-1"><a href="#客户端：啦啦啦，有没有新信息-Request-1" class="headerlink" title="客户端：啦啦啦，有没有新信息(Request)"></a>客户端：啦啦啦，有没有新信息(Request)</h4><h4 id="服务端：没有。。（Response）"><a href="#服务端：没有。。（Response）" class="headerlink" title="服务端：没有。。（Response）"></a>服务端：没有。。（Response）</h4><h4 id="客户端：啦啦啦，有没有新信息-Request-2"><a href="#客户端：啦啦啦，有没有新信息-Request-2" class="headerlink" title="客户端：啦啦啦，有没有新信息(Request)"></a>客户端：啦啦啦，有没有新信息(Request)</h4><h4 id="服务端：你好烦啊，没有啊。。（Response）"><a href="#服务端：你好烦啊，没有啊。。（Response）" class="headerlink" title="服务端：你好烦啊，没有啊。。（Response）"></a>服务端：你好烦啊，没有啊。。（Response）</h4><h4 id="客户端：啦啦啦，有没有新消息（Request）"><a href="#客户端：啦啦啦，有没有新消息（Request）" class="headerlink" title="客户端：啦啦啦，有没有新消息（Request）"></a>客户端：啦啦啦，有没有新消息（Request）</h4><h4 id="服务端：好啦好啦，有啦给你。（Response）"><a href="#服务端：好啦好啦，有啦给你。（Response）" class="headerlink" title="服务端：好啦好啦，有啦给你。（Response）"></a>服务端：好啦好啦，有啦给你。（Response）</h4><h4 id="客户端：啦啦啦，有没有新消息（Request）-1"><a href="#客户端：啦啦啦，有没有新消息（Request）-1" class="headerlink" title="客户端：啦啦啦，有没有新消息（Request）"></a>客户端：啦啦啦，有没有新消息（Request）</h4><h4 id="服务端：。。。。。没。。。。没。。。没有（Response）"><a href="#服务端：。。。。。没。。。。没。。。没有（Response）" class="headerlink" title="服务端：。。。。。没。。。。没。。。没有（Response）"></a>服务端：。。。。。没。。。。没。。。没有（Response）</h4><p>—- looplong </p>
-<p><strong>polllong</strong></p>
-<p>poll 其实原理跟 ajax轮询 差不多，都是采用轮询的方式，不过采取的是阻塞模型（一直打电话，没收到就不挂电话），也就是说，客户端发起连接后，如果没消息，就一直不返回Response给客户端。直到有消息才返回，返回完之后，客户端再次建立连接，周而复始。</p>
-<p>场景再现：</p>
-<h4 id="客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）"><a href="#客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）" class="headerlink" title="客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）"></a>客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）</h4><h4 id="服务端：额。。-等待到有消息的时候。。来-给你（Response）"><a href="#服务端：额。。-等待到有消息的时候。。来-给你（Response）" class="headerlink" title="服务端：额。。 等待到有消息的时候。。来 给你（Response）"></a>服务端：额。。 等待到有消息的时候。。来 给你（Response）</h4><h4 id="客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）-loop"><a href="#客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request）-loop" class="headerlink" title="客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request） -loop"></a>客户端：啦啦啦，有没有新信息，没有的话就等有了才返回给我吧（Request） -loop</h4><p>从上面可以看出其实这两种方式，都是在不断地建立HTTP连接，然后等待服务端处理，可以体现HTTP协议的另外一个特点，被动性。</p>
-<p>何为被动性呢，其实就是，服务端不能主动联系客户端，只能有客户端发起。</p>
-<p>简单地说就是，服务器是一个很懒的冰箱（这是个梗）（不会、不能主动发起连接），但是上司有命令，如果有客户来，不管多么累都要好好接待。</p>
-<p>说完这个，我们再来说一说上面的缺陷（原谅我废话这么多吧OAQ）</p>
-<p>从上面很容易看出来，不管怎么样，上面这两种都是非常消耗资源的。</p>
-<p>ajax轮询 需要服务器有很快的处理速度和资源。（速度）long poll 需要有很高的并发，也就是说同时接待客户的能力。（场地大小）</p>
-<p>所以 ajax轮询 和 long poll 都有可能发生这种情况。</p>
-<h4 id="客户端：啦啦啦啦，有新信息么？"><a href="#客户端：啦啦啦啦，有新信息么？" class="headerlink" title="客户端：啦啦啦啦，有新信息么？"></a>客户端：啦啦啦啦，有新信息么？</h4><h4 id="服务端：月线正忙，请稍后再试（503-Server-Unavailable）"><a href="#服务端：月线正忙，请稍后再试（503-Server-Unavailable）" class="headerlink" title="服务端：月线正忙，请稍后再试（503 Server Unavailable）"></a>服务端：月线正忙，请稍后再试（503 Server Unavailable）</h4><h4 id="客户端：。。。。好吧，啦啦啦，有新信息么？"><a href="#客户端：。。。。好吧，啦啦啦，有新信息么？" class="headerlink" title="客户端：。。。。好吧，啦啦啦，有新信息么？"></a>客户端：。。。。好吧，啦啦啦，有新信息么？</h4><h4 id="服务端：月线正忙，请稍后再试（503-Server-Unavailable）-1"><a href="#服务端：月线正忙，请稍后再试（503-Server-Unavailable）-1" class="headerlink" title="服务端：月线正忙，请稍后再试（503 Server Unavailable）"></a>服务端：月线正忙，请稍后再试（503 Server Unavailable）</h4><h4 id="客户端：然后服务端在一旁忙的要死：冰箱，我要更多的冰箱！更多。。更多。。（我错了。。这又是梗。。）"><a href="#客户端：然后服务端在一旁忙的要死：冰箱，我要更多的冰箱！更多。。更多。。（我错了。。这又是梗。。）" class="headerlink" title="客户端：然后服务端在一旁忙的要死：冰箱，我要更多的冰箱！更多。。更多。。（我错了。。这又是梗。。）"></a>客户端：然后服务端在一旁忙的要死：冰箱，我要更多的冰箱！更多。。更多。。（我错了。。这又是梗。。）</h4><h2 id="言归正传，我们来说Websocket吧"><a href="#言归正传，我们来说Websocket吧" class="headerlink" title="言归正传，我们来说Websocket吧"></a>言归正传，我们来说Websocket吧</h2><p>通过上面这个例子，我们可以看出，这两种方式都不是最好的方式，需要很多资源。</p>
-<p>一种需要更快的速度，一种需要更多的’电话’。这两种都会导致’电话’的需求越来越高。</p>
-<p>哦对了，忘记说了HTTP还是一个状态协议。通俗的说就是，服务器因为每天要接待太多客户了，是个健忘鬼，你一挂电话，他就把你的东西全忘光了，把你的东西全丢掉了。你第二次还得再告诉服务器一遍。</p>
-<p>所以在这种情况下出现了，Websocket出现了。他解决了HTTP的这几个难题。首先，被动性，当服务器完成协议升级后（HTTP-&gt;Websocket），服务端就可以主动推送信息给客户端啦。所以上面的情景可以做如下修改。</p>
-<h4 id="客户端：啦啦啦，我要建立Websocket协议，需要的服务：chat，Websocket协议版本：17（HTTP-Request）"><a href="#客户端：啦啦啦，我要建立Websocket协议，需要的服务：chat，Websocket协议版本：17（HTTP-Request）" class="headerlink" title="客户端：啦啦啦，我要建立Websocket协议，需要的服务：chat，Websocket协议版本：17（HTTP Request）"></a>客户端：啦啦啦，我要建立Websocket协议，需要的服务：chat，Websocket协议版本：17（HTTP Request）</h4><h4 id="服务端：ok，确认，已升级为Websocket协议（HTTP-Protocols-Switched）"><a href="#服务端：ok，确认，已升级为Websocket协议（HTTP-Protocols-Switched）" class="headerlink" title="服务端：ok，确认，已升级为Websocket协议（HTTP Protocols Switched）"></a>服务端：ok，确认，已升级为Websocket协议（HTTP Protocols Switched）</h4><h4 id="客户端：麻烦你有信息的时候推送给我噢。。"><a href="#客户端：麻烦你有信息的时候推送给我噢。。" class="headerlink" title="客户端：麻烦你有信息的时候推送给我噢。。"></a>客户端：麻烦你有信息的时候推送给我噢。。</h4><h4 id="服务端：ok，有的时候会告诉你的。"><a href="#服务端：ok，有的时候会告诉你的。" class="headerlink" title="服务端：ok，有的时候会告诉你的。"></a>服务端：ok，有的时候会告诉你的。</h4><h4 id="服务端：balabalabalabala"><a href="#服务端：balabalabalabala" class="headerlink" title="服务端：balabalabalabala"></a>服务端：balabalabalabala</h4><h4 id="服务端：balabalabalabala-1"><a href="#服务端：balabalabalabala-1" class="headerlink" title="服务端：balabalabalabala"></a>服务端：balabalabalabala</h4><h4 id="服务端：哈哈哈哈哈啊哈哈哈哈"><a href="#服务端：哈哈哈哈哈啊哈哈哈哈" class="headerlink" title="服务端：哈哈哈哈哈啊哈哈哈哈"></a>服务端：哈哈哈哈哈啊哈哈哈哈</h4><h4 id="服务端：笑死我了哈哈哈哈哈哈哈"><a href="#服务端：笑死我了哈哈哈哈哈哈哈" class="headerlink" title="服务端：笑死我了哈哈哈哈哈哈哈"></a>服务端：笑死我了哈哈哈哈哈哈哈</h4><p>就变成了这样，只需要经过一次HTTP请求，就可以做到源源不断的信息传送了。（在程序设计中，这种设计叫做回调，即：你有信息了再来通知我，而不是我傻乎乎的每次跑来问你 ）</p>
-<p>这样的协议解决了上面同步有延迟，而且还非常消耗资源的这种情况。那么为什么他会解决服务器上消耗资源的问题呢？</p>
-<p>其实我们所用的程序是要经过两层代理的，即HTTP协议在Nginx等服务器的解析下，然后再传送给相应的Handler（PHP等）来处理。简单地说，我们有一个非常快速的 接线员（Nginx） ，他负责把问题转交给相应的 客服（Handler） 。</p>
-<p>本身接线员基本上速度是足够的，但是每次都卡在客服（Handler）了，老有客服处理速度太慢。，导致客服不够。Websocket就解决了这样一个难题，建立后，可以直接跟接线员建立持久连接，有信息的时候客服想办法通知接线员，然后接线员在统一转交给客户。</p>
-<p>这样就可以解决客服处理速度过慢的问题了。</p>
-<p>同时，在传统的方式上，要不断的建立，关闭HTTP协议，由于HTTP是非状态性的，每次都要重新传输 identity info （鉴别信息），来告诉服务端你是谁。</p>
-<p>虽然接线员很快速，但是每次都要听这么一堆，效率也会有所下降的，同时还得不断把这些信息转交给客服，不但浪费客服的处理时间，而且还会在网路传输中消耗过多的流量/时间。</p>
-<p>但是Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。</p>
-<p>同时由客户主动询问，转换为服务器（推送）有信息的时候就发送（当然客户端还是等主动发送信息过来的。。），没有信息的时候就交给接线员（Nginx），不需要占用本身速度就慢的客服（Handler）了</p>
-<p>——————–至于怎么在不支持Websocket的客户端上使用Websocket。。答案是： 不能</p>
-<p>但是可以通过上面说的 long poll 和 ajax 轮询 来 模拟出类似的效果</p>
-<p>转自<br><a href="https://juejin.im/post/5afab6e651882542ba07eb41?utm_source=gold_browser_extension" target="_blank" rel="external">https://juejin.im/post/5afab6e651882542ba07eb41?utm_source=gold_browser_extension</a></p>
+<h2 id="core"><a href="#core" class="headerlink" title="core"></a>core</h2><p>core 目录包含了 Vue.js 的核心代码，包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。</p>
+<p>这里的代码可谓是 Vue.js 的灵魂，也是我们之后需要重点分析的地方。</p>
+<h2 id="platform"><a href="#platform" class="headerlink" title="platform"></a>platform</h2><p>Vue.js 是一个跨平台的 MVVM 框架，它可以跑在 web 上，也可以配合 weex 跑在 natvie 客户端上。platform 是 Vue.js 的入口，2 个目录代表 2 个主要入口，分别打包成运行在 web 上和 weex 上的 Vue.js。</p>
+<p>我们会重点分析 web 入口打包后的 Vue.js，对于 weex 入口打包的 Vue.js，感兴趣的同学可以自行研究。</p>
+<h2 id="server"><a href="#server" class="headerlink" title="server"></a>server</h2><p>Vue.js 2.0 支持了服务端渲染，所有服务端渲染相关的逻辑都在这个目录下。注意：这部分代码是跑在服务端的 Node.js，不要和跑在浏览器端的 Vue.js 混为一谈。</p>
+<p>服务端渲染主要的工作是把组件渲染为服务器端的 HTML 字符串，将它们直接发送到浏览器，最后将静态标记”混合”为客户端上完全交互的应用程序。</p>
+<h2 id="sfc"><a href="#sfc" class="headerlink" title="sfc"></a>sfc</h2><p>通常我们开发 Vue.js 都会借助 webpack 构建， 然后通过 .vue 单文件的编写组件。</p>
+<p>这个目录下的代码逻辑会把 .vue 文件内容解析成一个 JavaScript 的对象。</p>
+<h2 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h2><p>Vue.js 会定义一些工具方法，这里定义的工具方法都是会被浏览器端的 Vue.js 和服务端的 Vue.js 所共享的。</p>
 
       
 
@@ -287,7 +243,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
@@ -343,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2018/05/19/Websocket原理/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2018/07/31/vue源码目录设计/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -357,18 +313,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/31/vue源码目录设计/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Vue.js 源码目录设计
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/02/13/2017年总结。/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2017年总结。</div>
+    <a href="/2018/05/19/Websocket原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">websocket原理</div>
       <i class="icon-circle-right"></i>
     </a>
   
