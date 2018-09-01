@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>Archives | 征哥的博客</title>
+  <title>Vue.js 源码目录设计 | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/archives/index.html">
+  <meta name="description" content="入口 我们之前提到过 Vue.js 构建过程，在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是src/platforms/web/entry-runtime-with-compiler.js;  123456789101112131415161718192021222324252627282930313233343536373839404">
+<meta name="keywords" content="源码解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js 源码目录设计">
+<meta property="og:url" content="https://zhenggege.github.io/2018/09/01/vue源码入口/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="入口 我们之前提到过 Vue.js 构建过程，在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是src/platforms/web/entry-runtime-with-compiler.js;  123456789101112131415161718192021222324252627282930313233343536373839404">
+<meta property="og:updated_time" content="2018-09-01T04:43:23.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="Vue.js 源码目录设计">
+<meta name="twitter:description" content="入口 我们之前提到过 Vue.js 构建过程，在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是src/platforms/web/entry-runtime-with-compiler.js;  123456789101112131415161718192021222324252627282930313233343536373839404">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,36 +144,104 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-vue源码入口" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Vue.js 源码目录设计
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/01/vue源码入口/" class="archive-article-date">
+
+        
+        <a href="/2018/09/01/vue源码入口/" class="archive-article-date">
   	<time datetime="2018-09-01T04:30:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/01/vue源码入口/">Vue.js 源码目录设计</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h1 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h1><ul>
+<li>我们之前提到过 Vue.js 构建过程，在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是<code>src/platforms/web/entry-runtime-with-compiler.js</code>;</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* @flow */</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'core/config'</span></div><div class="line"><span class="keyword">import</span> &#123; warn, cached &#125; <span class="keyword">from</span> <span class="string">'core/util/index'</span></div><div class="line"><span class="keyword">import</span> &#123; mark, measure &#125; <span class="keyword">from</span> <span class="string">'core/util/perf'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'./runtime/index'</span></div><div class="line"><span class="keyword">import</span> &#123; query &#125; <span class="keyword">from</span> <span class="string">'./util/index'</span></div><div class="line"><span class="keyword">import</span> &#123; compileToFunctions &#125; <span class="keyword">from</span> <span class="string">'./compiler/index'</span></div><div class="line"><span class="keyword">import</span> &#123; shouldDecodeNewlines, shouldDecodeNewlinesForHref &#125; <span class="keyword">from</span> <span class="string">'./util/compat'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> idToTemplate = cached(<span class="function"><span class="params">id</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> el = query(id)</div><div class="line">  <span class="keyword">return</span> el &amp;&amp; el.innerHTML</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">const</span> mount = Vue.prototype.$mount</div><div class="line">Vue.prototype.$mount = <span class="function"><span class="keyword">function</span> (<span class="params"></span></span></div><div class="line"><span class="function"><span class="params">  el?: string | Element,</span></span></div><div class="line"><span class="function"><span class="params">  hydrating?: boolean</span></span></div><div class="line"><span class="function"><span class="params"></span>): <span class="title">Component</span> </span>&#123;</div><div class="line">  el = el &amp;&amp; query(el)</div><div class="line"></div><div class="line">  <span class="comment">/* istanbul ignore if */</span></div><div class="line">  <span class="keyword">if</span> (el === <span class="built_in">document</span>.body || el === <span class="built_in">document</span>.documentElement) &#123;</div><div class="line">    process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; warn(</div><div class="line">      <span class="string">`Do not mount Vue to &lt;html&gt; or &lt;body&gt; - mount to normal elements instead.`</span></div><div class="line">    )</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> options = <span class="keyword">this</span>.$options</div><div class="line">  <span class="comment">// resolve template/el and convert to render function</span></div><div class="line">  <span class="keyword">if</span> (!options.render) &#123;</div><div class="line">    <span class="keyword">let</span> template = options.template</div><div class="line">    <span class="keyword">if</span> (template) &#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> template === <span class="string">'string'</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (template.charAt(<span class="number">0</span>) === <span class="string">'#'</span>) &#123;</div><div class="line">          template = idToTemplate(template)</div><div class="line">          <span class="comment">/* istanbul ignore if */</span></div><div class="line">          <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; !template) &#123;</div><div class="line">            warn(</div><div class="line">              <span class="string">`Template element not found or is empty: <span class="subst">$&#123;options.template&#125;</span>`</span>,</div><div class="line">              <span class="keyword">this</span></div><div class="line">            )</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (template.nodeType) &#123;</div><div class="line">        template = template.innerHTML</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</div><div class="line">          warn(<span class="string">'invalid template option:'</span> + template, <span class="keyword">this</span>)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span></div><div class="line">      &#125;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (el) &#123;</div><div class="line">      template = getOuterHTML(el)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (template) &#123;</div><div class="line">      <span class="comment">/* istanbul ignore if */</span></div><div class="line">      <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">        mark(<span class="string">'compile'</span>)</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">const</span> &#123; render, staticRenderFns &#125; = compileToFunctions(template, &#123;</div><div class="line">        shouldDecodeNewlines,</div><div class="line">        shouldDecodeNewlinesForHref,</div><div class="line">        delimiters: options.delimiters,</div><div class="line">        comments: options.comments</div><div class="line">      &#125;, <span class="keyword">this</span>)</div><div class="line">      options.render = render</div><div class="line">      options.staticRenderFns = staticRenderFns</div><div class="line"></div><div class="line">      <span class="comment">/* istanbul ignore if */</span></div><div class="line">      <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; config.performance &amp;&amp; mark) &#123;</div><div class="line">        mark(<span class="string">'compile end'</span>)</div><div class="line">        measure(<span class="string">`vue <span class="subst">$&#123;<span class="keyword">this</span>._name&#125;</span> compile`</span>, <span class="string">'compile'</span>, <span class="string">'compile end'</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> mount.call(<span class="keyword">this</span>, el, hydrating)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Get outerHTML of elements, taking care</span></div><div class="line"><span class="comment"> * of SVG elements in IE as well.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getOuterHTML</span> (<span class="params">el: Element</span>): <span class="title">string</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (el.outerHTML) &#123;</div><div class="line">    <span class="keyword">return</span> el.outerHTML</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">const</span> container = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>)</div><div class="line">    container.appendChild(el.cloneNode(<span class="literal">true</span>))</div><div class="line">    <span class="keyword">return</span> container.innerHTML</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Vue.compile = compileToFunctions</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</div></pre></td></tr></table></figure>
+<p>那么，当我们的代码执行 import Vue from ‘vue’ 的时候，就是从这个入口执行代码来初始化 Vue</p>
+<h1 id="Vue-的入口"><a href="#Vue-的入口" class="headerlink" title="Vue 的入口"></a>Vue 的入口</h1><p>在这个入口 JS 的上方我们可以找到 Vue 的来源：<code>import Vue from &#39;./runtime/index&#39;</code>，我们先来看一下这块儿的实现，它定义在 <code>src/platforms/web/runtime/index.js</code> 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'core/index'</span></div><div class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'core/config'</span></div><div class="line"><span class="keyword">import</span> &#123; extend, noop &#125; <span class="keyword">from</span> <span class="string">'shared/util'</span></div><div class="line"><span class="keyword">import</span> &#123; mountComponent &#125; <span class="keyword">from</span> <span class="string">'core/instance/lifecycle'</span></div><div class="line"><span class="keyword">import</span> &#123; devtools, inBrowser, isChrome &#125; <span class="keyword">from</span> <span class="string">'core/util/index'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">  query,</div><div class="line">  mustUseProp,</div><div class="line">  isReservedTag,</div><div class="line">  isReservedAttr,</div><div class="line">  getTagNamespace,</div><div class="line">  isUnknownElement</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'web/util/index'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; patch &#125; <span class="keyword">from</span> <span class="string">'./patch'</span></div><div class="line"><span class="keyword">import</span> platformDirectives <span class="keyword">from</span> <span class="string">'./directives/index'</span></div><div class="line"><span class="keyword">import</span> platformComponents <span class="keyword">from</span> <span class="string">'./components/index'</span></div><div class="line"></div><div class="line"><span class="comment">// install platform specific utils</span></div><div class="line">Vue.config.mustUseProp = mustUseProp</div><div class="line">Vue.config.isReservedTag = isReservedTag</div><div class="line">Vue.config.isReservedAttr = isReservedAttr</div><div class="line">Vue.config.getTagNamespace = getTagNamespace</div><div class="line">Vue.config.isUnknownElement = isUnknownElement</div><div class="line"></div><div class="line"><span class="comment">// install platform runtime directives &amp; components</span></div><div class="line">extend(Vue.options.directives, platformDirectives)</div><div class="line">extend(Vue.options.components, platformComponents)</div><div class="line"></div><div class="line"><span class="comment">// install platform patch function</span></div><div class="line">Vue.prototype.__patch__ = inBrowser ? patch : noop</div><div class="line"></div><div class="line"><span class="comment">// public mount method</span></div><div class="line">Vue.prototype.$mount = <span class="function"><span class="keyword">function</span> (<span class="params"></span></span></div><div class="line"><span class="function"><span class="params">  el?: string | Element,</span></span></div><div class="line"><span class="function"><span class="params">  hydrating?: boolean</span></span></div><div class="line"><span class="function"><span class="params"></span>): <span class="title">Component</span> </span>&#123;</div><div class="line">  el = el &amp;&amp; inBrowser ? query(el) : <span class="literal">undefined</span></div><div class="line">  <span class="keyword">return</span> mountComponent(<span class="keyword">this</span>, el, hydrating)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</div></pre></td></tr></table></figure>
+<p>这里关键的代码是 <code>import Vue from &#39;core/index&#39;</code>，之后的逻辑都是对 Vue 这个对象做一些扩展，可以先不用看，我们来看一下真正初始化 Vue 的地方，在 <code>src/core/index.js</code> 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'./instance/index'</span></div><div class="line"><span class="keyword">import</span> &#123; initGlobalAPI &#125; <span class="keyword">from</span> <span class="string">'./global-api/index'</span></div><div class="line"><span class="keyword">import</span> &#123; isServerRendering &#125; <span class="keyword">from</span> <span class="string">'core/util/env'</span></div><div class="line"><span class="keyword">import</span> &#123; FunctionalRenderContext &#125; <span class="keyword">from</span> <span class="string">'core/vdom/create-functional-component'</span></div><div class="line"></div><div class="line">initGlobalAPI(Vue)</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$isServer'</span>, &#123;</div><div class="line">  get: isServerRendering</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$ssrContext'</span>, &#123;</div><div class="line">  get () &#123;</div><div class="line">    <span class="comment">/* istanbul ignore next */</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$vnode &amp;&amp; <span class="keyword">this</span>.$vnode.ssrContext</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// expose FunctionalRenderContext for ssr runtime helper installation</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(Vue, <span class="string">'FunctionalRenderContext'</span>, &#123;</div><div class="line">  value: FunctionalRenderContext</div><div class="line">&#125;)</div><div class="line"></div><div class="line">Vue.version = <span class="string">'__VERSION__'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</div></pre></td></tr></table></figure>
+<p>这里有 2 处关键的代码，<code>import Vue from &#39;./instance/index&#39; 和 initGlobalAPI(Vue)</code>，初始化全局 Vue API（我们稍后介绍），我们先来看第一部分，在 <code>src/core/instance/index.js</code> 中：</p>
+<p>#Vue 的定义</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; initMixin &#125; <span class="keyword">from</span> <span class="string">'./init'</span></div><div class="line"><span class="keyword">import</span> &#123; stateMixin &#125; <span class="keyword">from</span> <span class="string">'./state'</span></div><div class="line"><span class="keyword">import</span> &#123; renderMixin &#125; <span class="keyword">from</span> <span class="string">'./render'</span></div><div class="line"><span class="keyword">import</span> &#123; eventsMixin &#125; <span class="keyword">from</span> <span class="string">'./events'</span></div><div class="line"><span class="keyword">import</span> &#123; lifecycleMixin &#125; <span class="keyword">from</span> <span class="string">'./lifecycle'</span></div><div class="line"><span class="keyword">import</span> &#123; warn &#125; <span class="keyword">from</span> <span class="string">'../util/index'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span> (<span class="params">options</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</div><div class="line">    !(<span class="keyword">this</span> <span class="keyword">instanceof</span> Vue)</div><div class="line">  ) &#123;</div><div class="line">    warn(<span class="string">'Vue is a constructor and should be called with the `new` keyword'</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>._init(options)</div><div class="line">&#125;</div><div class="line"></div><div class="line">initMixin(Vue)</div><div class="line">stateMixin(Vue)</div><div class="line">eventsMixin(Vue)</div><div class="line">lifecycleMixin(Vue)</div><div class="line">renderMixin(Vue)</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</div></pre></td></tr></table></figure>
+<p>在这里，我们终于看到了 Vue 的庐山真面目，它实际上就是一个用 Function 实现的类，我们只能通过 new Vue 去实例化它。</p>
+<ul>
+<li>为何 Vue 不用 ES6 的 Class 去实现呢？我们往后看这里有很多 xxxMixin 的函数调用，并把 Vue 当参数传入，它们的功能都是给 Vue 的 prototype 上扩展一些方法（这里具体的细节会在之后的文章介绍，这里不展开），Vue 按功能把这些扩展分散到多个模块中去实现，而不是在一个模块里实现所有，这种方式是用 Class 难以实现的。这么做的好处是非常方便代码的维护和管理，这种编程技巧也非常值得我们去学习。</li>
+</ul>
+<h1 id="initGlobalAPI"><a href="#initGlobalAPI" class="headerlink" title="initGlobalAPI"></a><code>initGlobalAPI</code></h1><p>Vue.js 在整个初始化过程中，除了给它的原型 prototype 上扩展方法，还会给 Vue 这个对象本身扩展全局的静态方法，它的定义在 <code>src/core/global-api/index.js</code> 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initGlobalAPI</span> (<span class="params">Vue: GlobalAPI</span>) </span>&#123;</div><div class="line">  <span class="comment">// config</span></div><div class="line">  <span class="keyword">const</span> configDef = &#123;&#125;</div><div class="line">  configDef.get = <span class="function"><span class="params">()</span> =&gt;</span> config</div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</div><div class="line">    configDef.set = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      warn(</div><div class="line">        <span class="string">'Do not replace the Vue.config object, set individual fields instead.'</span></div><div class="line">      )</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">Object</span>.defineProperty(Vue, <span class="string">'config'</span>, configDef)</div><div class="line"></div><div class="line">  <span class="comment">// exposed util methods.</span></div><div class="line">  <span class="comment">// <span class="doctag">NOTE:</span> these are not considered part of the public API - avoid relying on</span></div><div class="line">  <span class="comment">// them unless you are aware of the risk.</span></div><div class="line">  Vue.util = &#123;</div><div class="line">    warn,</div><div class="line">    extend,</div><div class="line">    mergeOptions,</div><div class="line">    defineReactive</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Vue.set = set</div><div class="line">  Vue.delete = del</div><div class="line">  Vue.nextTick = nextTick</div></pre></td></tr></table></figure>
+<p>这里就是在 Vue 上扩展的一些全局方法的定义，Vue 官网中关于全局 API 都可以在这里找到.有一点要注意的是，Vue.util 暴露的方法最好不要依赖，因为它可能经常会发生变化，是不稳定的。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,587 +253,106 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/01/vue.js源码构建/" class="archive-article-date">
-  	<time datetime="2018-07-31T16:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/01/vue.js源码构建/">Vue.js 源码构建</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/31/vue源码目录设计/" class="archive-article-date">
-  	<time datetime="2018-07-31T15:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/31/vue源码目录设计/">Vue.js 源码目录设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/19/Websocket原理/" class="archive-article-date">
-  	<time datetime="2018-05-19T05:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/Websocket原理/">websocket原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/13/2017年总结。/" class="archive-article-date">
-  	<time datetime="2018-02-13T06:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/13/2017年总结。/">2017年总结。</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/11/几种协议/" class="archive-article-date">
-  	<time datetime="2017-12-11T15:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/11/几种协议/">几种协议</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
   </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/26/ios手机端的兼容问题/" class="archive-article-date">
-  	<time datetime="2017-11-26T15:21:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/26/ios手机端的兼容问题/">ios手机端的兼容问题(持续更新)</a>
-    </h1>
-  
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">兼容</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2018/09/01/vue源码入口/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/21/译-理解-React-redux-connect/" class="archive-article-date">
-  	<time datetime="2017-11-21T01:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/21/译-理解-React-redux-connect/">[译] 理解 React-redux connect</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/16/详解-CSS-居中布局技巧/" class="archive-article-date">
-  	<time datetime="2017-11-16T01:07:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/16/详解-CSS-居中布局技巧/">详解 CSS 居中布局技巧</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/BetterScroll移动端解决需求/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/BetterScroll移动端解决需求/">BetterScroll</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/07/mongodb用法/" class="archive-article-date">
-  	<time datetime="2017-03-07T06:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/07/mongodb用法/">mongodb用法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mongodb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/" class="archive-article-date">
-  	<time datetime="2017-02-10T05:09:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/10/深度剖析-如何实现一个Virtual-DOM-算法/">深度剖析：如何实现一个 Virtual DOM 算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/01/co源码解析/" class="archive-article-date">
-  	<time datetime="2017-01-01T15:59:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/01/co源码解析/">co源码解析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+<div class="mask js-mask"></div>
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/30/git命令/" class="archive-article-date">
-  	<time datetime="2016-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/30/git命令/">git使用说明</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/10/30/开通博客/" class="archive-article-date">
-  	<time datetime="2016-10-30T02:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/01/vue.js源码构建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue.js 源码构建</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/30/开通博客/">开通博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -787,8 +375,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
