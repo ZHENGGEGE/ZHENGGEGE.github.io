@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhenggege.github.io">
-  <title>征哥的博客</title>
+  <title>Virtual DOM和createElement | 征哥的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程师">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="征哥的博客">
-<meta property="og:url" content="https://zhenggege.github.io/index.html">
+  <meta name="description" content="#Virtual DOM和createElement Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提是浏览器中的 DOM 是很“昂贵”的，为了更直观的感受，我们可以简单的把一个简单的 div 元素的属性都打印出来，如图所示：">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtual DOM和createElement">
+<meta property="og:url" content="https://zhenggege.github.io/2018/10/09/Virtual DOM和createElement/index.html">
 <meta property="og:site_name" content="征哥的博客">
-<meta property="og:description" content="前端工程师">
+<meta property="og:description" content="#Virtual DOM和createElement Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提是浏览器中的 DOM 是很“昂贵”的，为了更直观的感受，我们可以简单的把一个简单的 div 元素的属性都打印出来，如图所示：">
+<meta property="og:image" content="https://zhenggege.github.io/2018/10/09/assets/dom.png">
+<meta property="og:updated_time" content="2018-10-09T12:00:48.380Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="征哥的博客">
-<meta name="twitter:description" content="前端工程师">
+<meta name="twitter:title" content="Virtual DOM和createElement">
+<meta name="twitter:description" content="#Virtual DOM和createElement Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提是浏览器中的 DOM 是很“昂贵”的，为了更直观的感受，我们可以简单的把一个简单的 div 元素的属性都打印出来，如图所示：">
+<meta name="twitter:image" content="https://zhenggege.github.io/2018/10/09/assets/dom.png">
   
     <link rel="alternative" href="/atom.xml" title="征哥的博客" type="application/atom+xml">
   
@@ -143,16 +146,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Virtual DOM和createElement" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Virtual DOM和createElement" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/Virtual DOM和createElement/">Virtual DOM和createElement</a>
+    <h1 class="article-title" itemprop="name">
+      Virtual DOM和createElement
     </h1>
   
 
@@ -167,12 +168,87 @@
       
         <hr>
 <p>#Virtual DOM和createElement</p>
-<p>Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提是浏览器中的 DOM 是很“昂贵”的，为了更直观的感受，我们可以简单的把一个简单的 div 元素的属性都打印出来，如图所示：<br>
-        
-          <a class="article-more-a" href="/2018/10/09/Virtual DOM和createElement/#more">more >></a>
-        
+<p>Virtual DOM 这个概念相信大部分人都不会陌生，它产生的前提是浏览器中的 DOM 是很“昂贵”的，为了更直观的感受，我们可以简单的把一个简单的 div 元素的属性都打印出来，如图所示：<br><a id="more"></a></p>
+<p><img src="../assets/dom.png"></p>
+<p>可以看到，真正的 DOM 元素是非常庞大的，因为浏览器的标准就把 DOM 设计的非常复杂。当我们频繁的去做 DOM 更新，会产生一定的性能问题。</p>
+<p>而 Virtual DOM 就是用一个原生的 JS 对象去描述一个 DOM 节点，所以它比创建一个 DOM 的代价要小很多。在 Vue.js 中，Virtual DOM 是用 VNode 这么一个 Class 去描述，它是定义在 src/core/vdom/vnode.js 中的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">VNode</span> </span>&#123;</div><div class="line">  tag: string | <span class="keyword">void</span>;</div><div class="line">  data: VNodeData | <span class="keyword">void</span>;</div><div class="line">  children: ?<span class="built_in">Array</span>&lt;VNode&gt;;</div><div class="line">  text: string | <span class="keyword">void</span>;</div><div class="line">  elm: Node | <span class="keyword">void</span>;</div><div class="line">  ns: string | <span class="keyword">void</span>;</div><div class="line">  context: Component | <span class="keyword">void</span>; <span class="comment">// rendered in this component's scope</span></div><div class="line">  key: string | number | <span class="keyword">void</span>;</div><div class="line">  componentOptions: VNodeComponentOptions | <span class="keyword">void</span>;</div><div class="line">  componentInstance: Component | <span class="keyword">void</span>; <span class="comment">// component instance</span></div><div class="line">  parent: VNode | <span class="keyword">void</span>; <span class="comment">// component placeholder node</span></div><div class="line"></div><div class="line">  <span class="comment">// strictly internal</span></div><div class="line">  raw: boolean; <span class="comment">// contains raw HTML? (server only)</span></div><div class="line">  isStatic: boolean; <span class="comment">// hoisted static node</span></div><div class="line">  isRootInsert: boolean; <span class="comment">// necessary for enter transition check</span></div><div class="line">  isComment: boolean; <span class="comment">// empty comment placeholder?</span></div><div class="line">  isCloned: boolean; <span class="comment">// is a cloned node?</span></div><div class="line">  isOnce: boolean; <span class="comment">// is a v-once node?</span></div><div class="line">  asyncFactory: <span class="built_in">Function</span> | <span class="keyword">void</span>; <span class="comment">// async component factory function</span></div><div class="line">  asyncMeta: <span class="built_in">Object</span> | <span class="keyword">void</span>;</div><div class="line">  isAsyncPlaceholder: boolean;</div><div class="line">  ssrContext: <span class="built_in">Object</span> | <span class="keyword">void</span>;</div><div class="line">  fnContext: Component | <span class="keyword">void</span>; <span class="comment">// real context vm for functional nodes</span></div><div class="line">  fnOptions: ?ComponentOptions; <span class="comment">// for SSR caching</span></div><div class="line">  fnScopeId: ?string; <span class="comment">// functional scope id support</span></div><div class="line"></div><div class="line">  <span class="keyword">constructor</span> (</div><div class="line">    tag?: string,</div><div class="line">    data?: VNodeData,</div><div class="line">    children?: ?Array&lt;VNode&gt;,</div><div class="line">    text?: string,</div><div class="line">    elm?: Node,</div><div class="line">    context?: Component,</div><div class="line">    componentOptions?: VNodeComponentOptions,</div><div class="line">    asyncFactory?: Function</div><div class="line">  ) &#123;</div><div class="line">    <span class="keyword">this</span>.tag = tag</div><div class="line">    <span class="keyword">this</span>.data = data</div><div class="line">    <span class="keyword">this</span>.children = children</div><div class="line">    <span class="keyword">this</span>.text = text</div><div class="line">    <span class="keyword">this</span>.elm = elm</div><div class="line">    <span class="keyword">this</span>.ns = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.context = context</div><div class="line">    <span class="keyword">this</span>.fnContext = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.fnOptions = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.fnScopeId = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.key = data &amp;&amp; data.key</div><div class="line">    <span class="keyword">this</span>.componentOptions = componentOptions</div><div class="line">    <span class="keyword">this</span>.componentInstance = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.parent = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.raw = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.isStatic = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.isRootInsert = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.isComment = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.isCloned = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.isOnce = <span class="literal">false</span></div><div class="line">    <span class="keyword">this</span>.asyncFactory = asyncFactory</div><div class="line">    <span class="keyword">this</span>.asyncMeta = <span class="literal">undefined</span></div><div class="line">    <span class="keyword">this</span>.isAsyncPlaceholder = <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// DEPRECATED: alias for componentInstance for backwards compat.</span></div><div class="line">  <span class="comment">/* istanbul ignore next */</span></div><div class="line">  get child (): Component | <span class="keyword">void</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.componentInstance</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到 Vue.js 中的 Virtual DOM 的定义还是略微复杂一些的，因为它这里包含了很多 Vue.js 的特性。这里千万不要被这些茫茫多的属性吓到，实际上 Vue.js 中 Virtual DOM 是借鉴了一个开源库 snabbdom 的实现，然后加入了一些 Vue.js 特色的东西。</p>
+<p>其实 VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。</p>
+<p>Virtual DOM 除了它的数据结构的定义，映射到真实的 DOM 实际上要经历 VNode 的 create、diff、patch 等过程。那么在 Vue.js 中，VNode 的 create 是通过之前提到的 createElement 方法创建的</p>
+<p>Vue.js 利用 createElement 方法创建 VNode，它定义在 src/core/vdom/create-elemenet.js 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// wrapper function for providing a more flexible interface</span></div><div class="line"><span class="comment">// without getting yelled at by flow</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createElement</span> (<span class="params"></span></span></div><div class="line"><span class="function"><span class="params">  context: Component,</span></span></div><div class="line"><span class="function"><span class="params">  tag: any,</span></span></div><div class="line"><span class="function"><span class="params">  data: any,</span></span></div><div class="line"><span class="function"><span class="params">  children: any,</span></span></div><div class="line"><span class="function"><span class="params">  normalizationType: any,</span></span></div><div class="line"><span class="function"><span class="params">  alwaysNormalize: boolean</span></span></div><div class="line"><span class="function"><span class="params"></span>): <span class="title">VNode</span> | <span class="title">Array</span>&lt;<span class="title">VNode</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(data) || isPrimitive(data)) &#123;</div><div class="line">    normalizationType = children</div><div class="line">    children = data</div><div class="line">    data = <span class="literal">undefined</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (isTrue(alwaysNormalize)) &#123;</div><div class="line">    normalizationType = ALWAYS_NORMALIZE</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> _createElement(context, tag, data, children, normalizationType)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>createElement 方法实际上是对 _createElement 方法的封装，它允许传入的参数更加灵活，在处理这些参数后，调用真正创建 VNode 的函数 _createElement：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">_createElement</span> (<span class="params"></span></span></div><div class="line"><span class="function"><span class="params">  context: Component,</span></span></div><div class="line"><span class="function"><span class="params">  tag?: string | Class&lt;Component&gt; | Function | Object,</span></span></div><div class="line"><span class="function"><span class="params">  data?: VNodeData,</span></span></div><div class="line"><span class="function"><span class="params">  children?: any,</span></span></div><div class="line"><span class="function"><span class="params">  normalizationType?: number</span></span></div><div class="line"><span class="function"><span class="params"></span>): <span class="title">VNode</span> | <span class="title">Array</span>&lt;<span class="title">VNode</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">if</span> (isDef(data) &amp;&amp; isDef((data: any).__ob__)) &#123;</div><div class="line">    process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp; warn(</div><div class="line">      <span class="string">`Avoid using observed data object as vnode data: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(data)&#125;</span>\n`</span> +</div><div class="line">      <span class="string">'Always create fresh vnode data objects in each render!'</span>,</div><div class="line">      context</div><div class="line">    )</div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// object syntax in v-bind</span></div><div class="line">  <span class="keyword">if</span> (isDef(data) &amp;&amp; isDef(data.is)) &#123;</div><div class="line">    tag = data.is</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (!tag) &#123;</div><div class="line">    <span class="comment">// in case of component :is set to falsy value</span></div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// warn against non-primitive key</span></div><div class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</div><div class="line">    isDef(data) &amp;&amp; isDef(data.key) &amp;&amp; !isPrimitive(data.key)</div><div class="line">  ) &#123;</div><div class="line">    <span class="keyword">if</span> (!__WEEX__ || !(<span class="string">'@binding'</span> <span class="keyword">in</span> data.key)) &#123;</div><div class="line">      warn(</div><div class="line">        <span class="string">'Avoid using non-primitive value as key, '</span> +</div><div class="line">        <span class="string">'use string/number value instead.'</span>,</div><div class="line">        context</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// support single function children as default scoped slot</span></div><div class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(children) &amp;&amp;</div><div class="line">    <span class="keyword">typeof</span> children[<span class="number">0</span>] === <span class="string">'function'</span></div><div class="line">  ) &#123;</div><div class="line">    data = data || &#123;&#125;</div><div class="line">    data.scopedSlots = &#123; <span class="attr">default</span>: children[<span class="number">0</span>] &#125;</div><div class="line">    children.length = <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (normalizationType === ALWAYS_NORMALIZE) &#123;</div><div class="line">    children = normalizeChildren(children)</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (normalizationType === SIMPLE_NORMALIZE) &#123;</div><div class="line">    children = simpleNormalizeChildren(children)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">let</span> vnode, ns</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">'string'</span>) &#123;</div><div class="line">    <span class="keyword">let</span> Ctor</div><div class="line">    ns = (context.$vnode &amp;&amp; context.$vnode.ns) || config.getTagNamespace(tag)</div><div class="line">    <span class="keyword">if</span> (config.isReservedTag(tag)) &#123;</div><div class="line">      <span class="comment">// platform built-in elements</span></div><div class="line">      vnode = <span class="keyword">new</span> VNode(</div><div class="line">        config.parsePlatformTagName(tag), data, children,</div><div class="line">        <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">      )</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(Ctor = resolveAsset(context.$options, <span class="string">'components'</span>, tag))) &#123;</div><div class="line">      <span class="comment">// component</span></div><div class="line">      vnode = createComponent(Ctor, data, context, children, tag)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// unknown or unlisted namespaced elements</span></div><div class="line">      <span class="comment">// check at runtime because it may get assigned a namespace when its</span></div><div class="line">      <span class="comment">// parent normalizes children</span></div><div class="line">      vnode = <span class="keyword">new</span> VNode(</div><div class="line">        tag, data, children,</div><div class="line">        <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">      )</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// direct component options / constructor</span></div><div class="line">    vnode = createComponent(tag, data, context, children)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(vnode)) &#123;</div><div class="line">    <span class="keyword">return</span> vnode</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(vnode)) &#123;</div><div class="line">    <span class="keyword">if</span> (isDef(ns)) applyNS(vnode, ns)</div><div class="line">    <span class="keyword">if</span> (isDef(data)) registerDeepBindings(data)</div><div class="line">    <span class="keyword">return</span> vnode</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> createEmptyVNode()</div><div class="line">  &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>_createElement 方法有 5 个参数，context 表示 VNode 的上下文环境，它是 Component 类型；tag 表示标签，它可以是一个字符串，也可以是一个 Component；data 表示 VNode 的数据，它是一个 VNodeData 类型，可以在 flow/vnode.js 中找到它的定义，这里先不展开说；children 表示当前 VNode 的子节点，它是任意类型的，它接下来需要被规范为标准的 VNode 数组；normalizationType 表示子节点规范的类型，类型不同规范的方法也就不一样，它主要是参考 render 函数是编译生成的还是用户手写的。</p>
+<p>createElement 函数的流程略微有点多，我们接下来主要分析 2 个重点的流程 —— children 的规范化以及 VNode 的创建。</p>
+<p>##children 的规范化<br>由于 Virtual DOM 实际上是一个树状结构，每一个 VNode 可能会有若干个子节点，这些子节点应该也是 VNode 的类型。_createElement 接收的第 4 个参数 children 是任意类型的，因此我们需要把它们规范成 VNode 类型。</p>
+<p>这里根据 normalizationType 的不同，调用了 normalizeChildren(children) 和 simpleNormalizeChildren(children) 方法，它们的定义都在 src/core/vdom/helpers/normalzie-children.js 中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// The template compiler attempts to minimize the need for normalization by</span></div><div class="line"><span class="comment">// statically analyzing the template at compile time.</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// For plain HTML markup, normalization can be completely skipped because the</span></div><div class="line"><span class="comment">// generated render function is guaranteed to return Array&lt;VNode&gt;. There are</span></div><div class="line"><span class="comment">// two cases where extra normalization is needed:</span></div><div class="line"></div><div class="line"><span class="comment">// 1. When the children contains components - because a functional component</span></div><div class="line"><span class="comment">// may return an Array instead of a single root. In this case, just a simple</span></div><div class="line"><span class="comment">// normalization is needed - if any child is an Array, we flatten the whole</span></div><div class="line"><span class="comment">// thing with Array.prototype.concat. It is guaranteed to be only 1-level deep</span></div><div class="line"><span class="comment">// because functional components already normalize their own children.</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">simpleNormalizeChildren</span> (<span class="params">children: any</span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; children.length; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(children[i])) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.concat.apply([], children)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> children</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 2. When the children contains constructs that always generated nested Arrays,</span></div><div class="line"><span class="comment">// e.g. &lt;template&gt;, &lt;slot&gt;, v-for, or when the children is provided by user</span></div><div class="line"><span class="comment">// with hand-written render functions / JSX. In such cases a full normalization</span></div><div class="line"><span class="comment">// is needed to cater to all possible types of children values.</span></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">normalizeChildren</span> (<span class="params">children: any</span>): ?<span class="title">Array</span>&lt;<span class="title">VNode</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">return</span> isPrimitive(children)</div><div class="line">    ? [createTextVNode(children)]</div><div class="line">    : <span class="built_in">Array</span>.isArray(children)</div><div class="line">      ? normalizeArrayChildren(children)</div><div class="line">      : <span class="literal">undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>simpleNormalizeChildren 方法调用场景是 render 函数当函数是编译生成的。理论上编译生成的 children 都已经是 VNode 类型的，但这里有一个例外，就是 functional component 函数式组件返回的是一个数组而不是一个根节点，所以会通过 Array.prototype.concat 方法把整个 children 数组打平，让它的深度只有一层。</p>
+<p>normalizeChildren 方法的调用场景有 2 种，一个场景是 render 函数是用户手写的，当 children 只有一个节点的时候，Vue.js 从接口层面允许用户把 children 写成基础类型用来创建单个简单的文本节点，这种情况会调用 createTextVNode 创建一个文本节点的 VNode；另一个场景是当编译 slot、v-for 的时候会产生嵌套数组的情况，会调用 normalizeArrayChildren 方法，接下来看一下它的实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">normalizeArrayChildren</span> (<span class="params">children: any, nestedIndex?: string</span>): <span class="title">Array</span>&lt;<span class="title">VNode</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">const</span> res = []</div><div class="line">  <span class="keyword">let</span> i, c, lastIndex, last</div><div class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; children.length; i++) &#123;</div><div class="line">    c = children[i]</div><div class="line">    <span class="keyword">if</span> (isUndef(c) || <span class="keyword">typeof</span> c === <span class="string">'boolean'</span>) <span class="keyword">continue</span></div><div class="line">    lastIndex = res.length - <span class="number">1</span></div><div class="line">    last = res[lastIndex]</div><div class="line">    <span class="comment">//  nested</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(c)) &#123;</div><div class="line">      <span class="keyword">if</span> (c.length &gt; <span class="number">0</span>) &#123;</div><div class="line">        c = normalizeArrayChildren(c, <span class="string">`<span class="subst">$&#123;nestedIndex || <span class="string">''</span>&#125;</span>_<span class="subst">$&#123;i&#125;</span>`</span>)</div><div class="line">        <span class="comment">// merge adjacent text nodes</span></div><div class="line">        <span class="keyword">if</span> (isTextNode(c[<span class="number">0</span>]) &amp;&amp; isTextNode(last)) &#123;</div><div class="line">          res[lastIndex] = createTextVNode(last.text + (c[<span class="number">0</span>]: any).text)</div><div class="line">          c.shift()</div><div class="line">        &#125;</div><div class="line">        res.push.apply(res, c)</div><div class="line">      &#125;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isPrimitive(c)) &#123;</div><div class="line">      <span class="keyword">if</span> (isTextNode(last)) &#123;</div><div class="line">        <span class="comment">// merge adjacent text nodes</span></div><div class="line">        <span class="comment">// this is necessary for SSR hydration because text nodes are</span></div><div class="line">        <span class="comment">// essentially merged when rendered to HTML strings</span></div><div class="line">        res[lastIndex] = createTextVNode(last.text + c)</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (c !== <span class="string">''</span>) &#123;</div><div class="line">        <span class="comment">// convert primitive to vnode</span></div><div class="line">        res.push(createTextVNode(c))</div><div class="line">      &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">if</span> (isTextNode(c) &amp;&amp; isTextNode(last)) &#123;</div><div class="line">        <span class="comment">// merge adjacent text nodes</span></div><div class="line">        res[lastIndex] = createTextVNode(last.text + c.text)</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// default key for nested array children (likely generated by v-for)</span></div><div class="line">        <span class="keyword">if</span> (isTrue(children._isVList) &amp;&amp;</div><div class="line">          isDef(c.tag) &amp;&amp;</div><div class="line">          isUndef(c.key) &amp;&amp;</div><div class="line">          isDef(nestedIndex)) &#123;</div><div class="line">          c.key = <span class="string">`__vlist<span class="subst">$&#123;nestedIndex&#125;</span>_<span class="subst">$&#123;i&#125;</span>__`</span></div><div class="line">        &#125;</div><div class="line">        res.push(c)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> res</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>normalizeArrayChildren 接收 2 个参数，children 表示要规范的子节点，nestedIndex 表示嵌套的索引，因为单个 child 可能是一个数组类型。 normalizeArrayChildren 主要的逻辑就是遍历 children，获得单个节点 c，然后对 c 的类型判断，如果是一个数组类型，则递归调用 normalizeArrayChildren; 如果是基础类型，则通过 createTextVNode 方法转换成 VNode 类型；否则就已经是 VNode 类型了，如果 children 是一个列表并且列表还存在嵌套的情况，则根据 nestedIndex 去更新它的 key。这里需要注意一点，在遍历的过程中，对这 3 种情况都做了如下处理：如果存在两个连续的 text 节点，会把它们合并成一个 text 节点。</p>
+<p>经过对 children 的规范化，children 变成了一个类型为 VNode 的 Array。</p>
+<p>##VNode 的创建</p>
+<p>回到 createElement 函数，规范化 children 后，接下来会去创建一个 VNode 的实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> vnode, ns</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">'string'</span>) &#123;</div><div class="line">  <span class="keyword">let</span> Ctor</div><div class="line">  ns = (context.$vnode &amp;&amp; context.$vnode.ns) || config.getTagNamespace(tag)</div><div class="line">  <span class="keyword">if</span> (config.isReservedTag(tag)) &#123;</div><div class="line">    <span class="comment">// platform built-in elements</span></div><div class="line">    vnode = <span class="keyword">new</span> VNode(</div><div class="line">      config.parsePlatformTagName(tag), data, children,</div><div class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">    )</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(Ctor = resolveAsset(context.$options, <span class="string">'components'</span>, tag))) &#123;</div><div class="line">    <span class="comment">// component</span></div><div class="line">    vnode = createComponent(Ctor, data, context, children, tag)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// unknown or unlisted namespaced elements</span></div><div class="line">    <span class="comment">// check at runtime because it may get assigned a namespace when its</span></div><div class="line">    <span class="comment">// parent normalizes children</span></div><div class="line">    vnode = <span class="keyword">new</span> VNode(</div><div class="line">      tag, data, children,</div><div class="line">      <span class="literal">undefined</span>, <span class="literal">undefined</span>, context</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="comment">// direct component options / constructor</span></div><div class="line">  vnode = createComponent(tag, data, context, children)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里先对 tag 做判断，如果是 string 类型，则接着判断如果是内置的一些节点，则直接创建一个普通 VNode，如果是为已注册的组件名，则通过 createComponent 创建一个组件类型的 VNode，否则创建一个未知的标签的 VNode。 如果是 tag 一个 Component 类型，则直接调用 createComponent 创建一个组件类型的 VNode 节点。对于 createComponent 创建组件类型的 VNode 的过程，我们之后会去介绍，本质上它还是返回了一个 VNode。</p>
+<p>那么至此，我们大致了解了 createElement 创建 VNode 的过程，每个 VNode 有 children，children 每个元素也是一个 VNode，这样就形成了一个 VNode Tree，它很好的描述了我们的 DOM Tree。</p>
+<p>回到 mountComponent 函数的过程，我们已经知道 vm._render 是如何创建了一个 VNode，接下来就是要把这个 VNode 渲染成一个真实的 DOM 并渲染出来，这个过程是通过 vm._update 完成的</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我抽根烟<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/zhifubao.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTY1MS84MjE1">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装代码 -->
       
     </div>
     <div class="article-info article-info-index">
@@ -192,16 +268,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/Virtual DOM和createElement/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhenggege.github.io/2018/10/09/Virtual DOM和createElement/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/09/vue render函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue render函数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -221,719 +356,14 @@
 
 
 
-
-  
-    <article id="post-vue render函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/vue render函数/">Vue render函数</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/09/vue render函数/" class="archive-article-date">
-  	<time datetime="2018-10-09T11:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>#Vue render函数</p>
-<p>Vue 的 _render 方法是实例的一个私有方法，它用来把实例渲染成一个虚拟 Node。它的定义在 <code>src/core/instance/render.js</code> 文件中：</p>
-        
-          <a class="article-more-a" href="/2018/10/09/vue render函数/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/vue render函数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue源码入口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/01/vue源码入口/">Vue.js 源码入口</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/01/vue源码入口/" class="archive-article-date">
-  	<time datetime="2018-09-01T04:30:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h1 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h1><ul>
-<li>我们之前提到过 Vue.js 构建过程，在 web 应用下，我们来分析 Runtime + Compiler 构建出来的 Vue.js，它的入口是<code>src/platforms/web/entry-runtime-with-compiler.js</code>;</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/09/01/vue源码入口/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/01/vue源码入口/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue.js源码构建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/01/vue.js源码构建/">Vue.js 源码构建</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/01/vue.js源码构建/" class="archive-article-date">
-  	<time datetime="2018-07-31T16:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>#Vue.js 源码构建</p>
-<p>Vue.js 源码是基于 Rollup 构建的，它的构建相关配置都在 scripts 目录下。</p>
-<h2 id="构建脚本"><a href="#构建脚本" class="headerlink" title="构建脚本"></a>构建脚本</h2><p>通常一个基于 NPM 托管的项目都会有一个 package.json 文件，它是对项目的描述文件，它的内容实际上是一个标准的 JSON 对象。</p>
-<p>我们通常会配置 script 字段作为 NPM 的执行脚本，Vue.js 源码构建的脚本如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"script"</span>: &#123;</div><div class="line">    <span class="string">"build"</span>: <span class="string">"node scripts/build.js"</span>,</div><div class="line">    <span class="string">"build:ssr"</span>: <span class="string">"npm run build -- web-runtime-cjs,web-server-renderer"</span>,</div><div class="line">    <span class="string">"build:weex"</span>: <span class="string">"npm run build --weex"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/08/01/vue.js源码构建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/01/vue.js源码构建/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue源码目录设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/31/vue源码目录设计/">Vue.js 源码目录设计</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/31/vue源码目录设计/" class="archive-article-date">
-  	<time datetime="2018-07-31T15:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>#Vue.js 源码目录设计</p>
-<p>Vue.js 的源码都在 src 目录下，其目录结构如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src</div><div class="line">├── compiler        # 编译相关 </div><div class="line">├── core            # 核心代码 </div><div class="line">├── platforms       # 不同平台的支持</div><div class="line">├── server          # 服务端渲染</div><div class="line">├── sfc             # .vue 文件解析</div><div class="line">├── shared          # 共享代码</div></pre></td></tr></table></figure>
-<h2 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h2><p>compiler 目录包含 Vue.js 所有编译相关的代码。它包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。</p>
-<p>编译的工作可以在构建时做（借助 webpack、vue-loader 等辅助插件）；也可以在运行时做，使用包含构建功能的 Vue.js。显然，编译是一项耗性能的工作，所以更推荐前者——离线编译。</p>
-        
-          <a class="article-more-a" href="/2018/07/31/vue源码目录设计/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/31/vue源码目录设计/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Websocket原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/19/Websocket原理/">websocket原理</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/19/Websocket原理/" class="archive-article-date">
-  	<time datetime="2018-05-19T05:39:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、websocket与http"><a href="#一、websocket与http" class="headerlink" title="一、websocket与http"></a>一、websocket与http</h2><p>WebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）</p>
-<p>首先HTTP有 <strong>1.1</strong> 和 <strong>1.0</strong> 之说，也就是所谓的 <strong>keep-alive</strong> ，把多个HTTP请求合并为一个，但是 <strong>Websocket</strong> 其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充.可以通过这样一张图理解</p>
-<p><img src="/img/webscoket原理/httpwebsocket.png" width="200px" height="100px"></p>
-        
-          <a class="article-more-a" href="/2018/05/19/Websocket原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/19/Websocket原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2017年总结。" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/13/2017年总结。/">2017年总结。</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/13/2017年总结。/" class="archive-article-date">
-  	<time datetime="2018-02-13T06:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2017年转眼间就过去了，已经大学毕业1年多了，这一年感觉成长了好多好多，发现自己越来越喜欢写代码了，当你工作干的事情是你的兴趣的时候，会发现平常时间过得挺快，过得也挺幸福的。<br>
-        
-          <a class="article-more-a" href="/2018/02/13/2017年总结。/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/13/2017年总结。/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-几种协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/11/几种协议/">几种协议</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/11/几种协议/" class="archive-article-date">
-  	<time datetime="2017-12-11T15:55:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>长连接：一个连接上可以连续发送多个数据包，在连接期间，如果没有数据包发送，需要双方发链路检查包。</p>
-<p>TCP/IP：TCP/IP 属于传输层，主要解决数据在网络中的传输问题，只管传输数据。但是那样对传输的数据没有一个规范的封装、解析等处理，使得传输的数据就很难识别，所以才有了应用层协议对数据的封装、解析等，如 HTTP 协议。<br>
-        
-          <a class="article-more-a" href="/2017/12/11/几种协议/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">协议</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/11/几种协议/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ios手机端的兼容问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/26/ios手机端的兼容问题/">ios手机端的兼容问题(持续更新)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/26/ios手机端的兼容问题/" class="archive-article-date">
-  	<time datetime="2017-11-26T15:21:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-去除ios页面的input、textarea的自带效果（阴影、等）"><a href="#1-去除ios页面的input、textarea的自带效果（阴影、等）" class="headerlink" title="1.去除ios页面的input、textarea的自带效果（阴影、等）"></a>1.去除ios页面的input、textarea的自带效果（阴影、等）</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span>,<span class="selector-tag">textarea</span> &#123;<span class="attribute">-webkit-appearance</span>:none;&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-iOS系统上常常能看到高斯模糊-Gaussian-Blur-效果。"><a href="#2-iOS系统上常常能看到高斯模糊-Gaussian-Blur-效果。" class="headerlink" title="2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。"></a>2.iOS系统上常常能看到高斯模糊(Gaussian Blur)效果。</h2><p><a href="http://www.w3cplus.com/css3/advanced-css-filters.html" target="_blank" rel="external">http://www.w3cplus.com/css3/advanced-css-filters.html</a>  此处在大漠大神的博客学到好多。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">backdrop-filter</span>：<span class="selector-tag">blur</span>(10<span class="selector-tag">px</span>);</div><div class="line">//只支持ios端；只作用于当前元素；</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/11/26/ios手机端的兼容问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">兼容</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/26/ios手机端的兼容问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-译-理解-React-redux-connect" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/译-理解-React-redux-connect/">[译] 理解 React-redux connect</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/21/译-理解-React-redux-connect/" class="archive-article-date">
-  	<time datetime="2017-11-21T01:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/redux1.png" width="500px" height="300px"></p>
-        
-          <a class="article-more-a" href="/2017/11/21/译-理解-React-redux-connect/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/译-理解-React-redux-connect/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -956,8 +386,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
